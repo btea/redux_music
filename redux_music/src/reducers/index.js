@@ -9,10 +9,12 @@ function playlist(state = [],action){
     }
 }
 
-function songlist(state = [],action) {
+function songlist(state = {list: null},action) {
     switch(action.type){
         case 'SONGS_REFRESH':
-            return [...state,action.song];
+            return Object.assign({},state,{
+                list: action.list
+            });
         default:
             return state;
     }
