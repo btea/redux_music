@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux'
 import * as Actions from './actions/index'
 import * as fetch from './fetch/index'
 import PlayList from './components/playlist'
+import {songlist} from "./actions/index";
 
 class App extends React.Component{
     componentDidMount(){
@@ -28,7 +29,8 @@ class App extends React.Component{
 
 function mapStateToProps(state){
     return {
-        playlist: state.playlist
+        playlist: state.playlist,
+        songlist: state.songlist
     }
 }
 
