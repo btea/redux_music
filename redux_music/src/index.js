@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {createStore,compose} from 'redux'
 import reducers from './reducers/index'
+import Links from './route/index'
+import './iconfont/material-icons.css';
+
 
 let store = createStore(
     reducers,
@@ -13,7 +16,7 @@ let store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Links />
     </Provider>,
     document.getElementById('root')
 );
