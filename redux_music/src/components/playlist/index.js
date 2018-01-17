@@ -8,7 +8,7 @@ export default class PlayList extends React.Component{
     }
 
     render(){
-        console.log(this.props)
+        console.log(this.props);
         return(
             <div className="playlist_box">
                 {
@@ -20,7 +20,7 @@ export default class PlayList extends React.Component{
                                 </div>
                                 <div className="playCount">
                                     <i className="material-icons">headset_mic</i>
-                                    <span className='paly_count'>{playCount(item.playCount)}</span>
+                                    <span className='play_count'>{playCount(item.playCount)}</span>
                                 </div>
                                 <div className="description">
                                     {item.name}

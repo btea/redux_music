@@ -20,7 +20,7 @@ class App extends React.Component{
             <div className="recommend">
                 {
                     this.props.playlist ? this.props.playlist.length ?
-                        <PlayList list={this.props.playlist[0]}/> : '' : ''
+                        <PlayList  list={this.props.playlist[0]}/> : '' : ''
                 }
             </div>
         )
@@ -29,8 +29,7 @@ class App extends React.Component{
 
 function mapStateToProps(state){
     return {
-        playlist: state.playlist,
-        songlist: state.songlist
+        playlist: state.playlist
     }
 }
 

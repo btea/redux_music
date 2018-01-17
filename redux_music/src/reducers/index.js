@@ -13,8 +13,17 @@ function songlist(state = {list: null},action) {
     switch(action.type){
         case 'SONGS_REFRESH':
             return Object.assign({},state,{
-                list: action.list
+                list: action.song
             });
+        default:
+            return state;
+    }
+}
+
+function coverStatus(state = false,action){
+    switch (action.type){
+        case 'COVER_STATUS':
+            return !state;
         default:
             return state;
     }
@@ -22,6 +31,7 @@ function songlist(state = {list: null},action) {
 
 let reducers = combineReducers({
     playlist,
-    songlist
+    songlist,
+    coverStatus
 });
-export default reducers;
+export default reducers

@@ -1,0 +1,111 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.playlist_detail{
+    position: relative;
+}
+.playlist_detail header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+}
+.playlist_detail header .play_list_song_search{float: right;}
+.playlist_detail header span{
+    display: inline-block;
+    height: 40px;
+    vertical-align: top;
+}
+.playlist_detail header .message{
+    max-width: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 15px;
+    box-sizing: border-box;
+    padding-top: 7px;
+}
+.playlist_detail .container{
+    margin-top: 40px;
+}
+.playlist_detail .container .container_header{
+    margin: 15px;
+}
+.playlist_detail .container .detail_cover:after{
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+.playlist_detail .container .cover_img_playCount{
+    position: relative;
+    width: 140px;
+    height: 140px;
+    float: left;
+}
+
+.playlist_detail .container .cover_img_playCount img{
+    width: 100%;
+    height: 100%;
+}
+.playlist_detail .container .count{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 15px;
+    color: white;
+}
+.playlist_detail .container .count i{
+    font-size: 15px;
+}
+.container .detail_cover .name_creator{
+    float: left;
+    width: calc(100% - 140px);
+    width: -webkit-calc(100% - 140px);
+    width: -moz-calc(100% - 140px);
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.container .detail_cover .name_creator .name{
+    font-size: 15px;
+    font-style: normal;
+}
+.detail_cover .name_creator .avatar{
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+}
+.detail_cover .name_creator .creator{
+    margin-top: 10px;
+    height: 25px;
+}
+.detail_cover .name_creator h1{
+    height: 45px;
+    overflow: hidden;
+}
+.detail_cover .name_creator .creator i{
+    font-size: 25px;
+}
+.detail_cover .name_creator .creator_name{
+    display: inline-block;
+    height: 25px;
+    text-align: center;
+    vertical-align: top;
+    line-height: 25px;
+    font-size: 12px;
+    margin-left: 5px;
+    max-width: calc(100% - 55px);
+    max-width: -webkit-calc(100% - 55px);
+    max-width: -moz-calc(100% - 55px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

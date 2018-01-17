@@ -12,3 +12,10 @@ export function songlist(songs) {
         song: songs
     }
 }
+
+// 歌单封面详情是否显示
+export function listCover(){
+    return {
+        type: 'COVER_STATUS'
+    }
+}

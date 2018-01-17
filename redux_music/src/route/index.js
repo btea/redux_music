@@ -1,5 +1,5 @@
 import {BrowserRouter as Router,Route} from 'react-router-dom'
-import Single from './../containers/single'
+import Single from './../containers/single/index'
 import React from 'react'
 import App from '../App'
 
