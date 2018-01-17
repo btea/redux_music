@@ -19,7 +19,7 @@ function songlist(state = {list: null},action) {
             return state;
     }
 }
-
+// 歌单封面信息默认隐藏
 function coverStatus(state = false,action){
     switch (action.type){
         case 'COVER_STATUS':

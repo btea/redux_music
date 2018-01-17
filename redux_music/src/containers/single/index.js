@@ -55,13 +55,30 @@ class Single extends React.Component{
                                     </div>
                                 </div>
                             </div>
-
-
-
+                            <div className="icon_list">
+                                <ul className="icon">
+                                    <li className="collection">
+                                        <i className="material-icons">collections</i>
+                                        <div className="num">{playCount(list.subscribedCount)}</div>
+                                    </li>
+                                    <li className="comment">
+                                        <i className="material-icons">chat</i>
+                                        <div className="num">{playCount(list.commentCount)}</div>
+                                    </li>
+                                    <li className="share">
+                                        <i className="material-icons">share</i>
+                                        <div className="num">{playCount(list.shareCount)}</div>
+                                    </li>
+                                    <li className="download">
+                                        <i className="material-icons">file_download</i>
+                                        <div>下载</div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                     </div>
-                    <ListCoverDetail info={list.creator}/>
+                    <ListCoverDetail info={list} state={this.props.status} listCover={this.props.actions.listCover}/>
                 </div>
             )
         }else{
