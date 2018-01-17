@@ -6,6 +6,7 @@ import * as Actions from '../../actions/index'
 import {Link} from 'react-router-dom'
 import './index.css'
 import ListCoverDetail from './listCoverDetail'
+import SongList from '../../components/songlists/index'
 
 class Single extends React.Component{
     componentDidMount(){
@@ -76,7 +77,7 @@ class Single extends React.Component{
                                 </ul>
                             </div>
                         </div>
-
+                        <SongList list={list.tracks}/>
                     </div>
                     <ListCoverDetail info={list} state={this.props.status} listCover={this.props.actions.listCover}/>
                 </div>
