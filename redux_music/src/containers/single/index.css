@@ -12,6 +12,8 @@ body,ul,li{
     left: 0;
     height: 40px;
     width: 100%;
+    background: #fff;
+    z-index: 5;
 }
 .playlist_detail header .play_list_song_search{float: right;}
 .playlist_detail header span{
@@ -153,7 +155,7 @@ body,ul,li{
     font-family: 楷体;
 }
 .list_detail i{
-    position: absolute;
+    position: fixed;
     right: 10px;
     top: 10px;
     color: rgba(255,255,255,.8);
@@ -205,6 +207,11 @@ body,ul,li{
     height: 45px;
     background: rgb(58,61,62);
 }
+/*.download_cover .vague{*/
+    /*height: 20px;*/
+    /*width: 100%;*/
+    /*background: rgba(58,61,62,.2);*/
+/*}*/
 .download_cover .load{
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;

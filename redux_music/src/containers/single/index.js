@@ -23,7 +23,8 @@ class Single extends React.Component{
         let list = this.props.list;
         if(list){
             return(
-                <div className="playlist_detail">
+                // 阻止滚动穿透  滚动定位进一步完善？？？！！！
+                <div className="playlist_detail" style={{position: this.props.status ? 'fixed' : 'relative'}}>
                     <header>
                         <Link to='/'>
                             <span className="back">
@@ -77,7 +78,7 @@ class Single extends React.Component{
                                 </ul>
                             </div>
                         </div>
-                        <SongList list={list.tracks}/>
+                        <SongList list={list.tracks} play={this.props.actions.playInfo} />
                     </div>
                     <ListCoverDetail info={list} state={this.props.status} listCover={this.props.actions.listCover}/>
                 </div>

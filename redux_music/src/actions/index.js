@@ -19,3 +19,17 @@ export function listCover(){
         type: 'COVER_STATUS'
     }
 }
+
+// 当前正在播放的歌曲信息
+export function playInfo(list){
+    return {
+        type: 'PLAY',
+        info: list
+    }
+}
+// 当前正在播放音乐状态
+export function playStatus() {
+    return {
+        type: 'SWITCH'
+    }
+}

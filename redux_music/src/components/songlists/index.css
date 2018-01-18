@@ -1,0 +1,85 @@
+.song_list{
+    margin: 15px 15px 40px 15px;
+}
+.total {
+    height: 40px;
+    width: 100%;
+}
+.total .icon_total{
+    float: left;
+    height: 40px;
+}
+.total  i{
+    font-size: 30px;
+    margin-top: 5px;
+}
+.icon_total .total_num{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: top;
+    font-size: 15px;
+    margin-left: 15px;
+}
+.icon_total .total_num .num{
+    font-style: normal;
+    font-size: 12px;
+}
+.total .more_list{
+    float: right;
+    font-size: 12px;
+    height: 40px;
+}
+.total .more_list span{
+    line-height: 40px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.list_show .single_List{
+    font-size: 12px;
+    height: 40px;
+    border-top: 1px solid rgba(58,61,6,.4);
+    border-bottom: 1px solid rgba(58,61,6,.4);
+    margin-top: -1px;
+}
+.single_List .singer_name,.single_List .icon{
+
+}
+.list_show .single_List>div{height: 40px;}
+.list_show .single_List .index{
+    width: 40px;
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    font-size: 15px;
+}
+.list_show .single_List .icon{
+    float: right;
+}
+.list_show .single_List .icon i{
+    font-size: 30px;
+    margin-top: 5px;
+}
+.list_show .single_List .singer_name{
+    float: left;
+    width: calc(100% - 80px);
+    width: -webkit-calc(100% - 80px);
+    width: -moz-calc(100% - 80px);
+}
+.list_show .single_List .singer_name div{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.list_show .single_List .singer_name .singer_ar{
+    color: #efefef;
+    -webkit-transform: scale(.8);
+    -moz-transform: scale(.8);
+    -ms-transform: scale(.8);
+    -o-transform: scale(.8);
+    transform: scale(.8);
+    margin-left: -10%;
+}

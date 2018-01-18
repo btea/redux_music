@@ -1,0 +1,46 @@
+.bottom_player{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    background: #ffffff;
+}
+.bottom_player:after{
+    content: '';
+    display: block;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+    clear: both;
+}
+.bottom_player>div{float: left;}
+.bottom_player .play_img,.bottom_player .play_pause{
+    width: 30px;
+    height: 30px;
+    margin: 5px 15px;
+}
+.bottom_player .play_pause i{font-size: 30px;}
+.bottom_player .play_img img{
+    width: 30px;
+    height: 30px;
+}
+.bottom_player .play_message{
+    width: calc(100% - 120px);
+    width: -webkit-calc(100% - 120px);
+    width: -moz-calc(100% - 120px);
+    height: 40px;
+}
+.bottom_player .play_message div{
+    height: 20px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    color: #000000;
+    text-decoration: none;
+}
+.bottom_player a{
+    text-decoration: none;
+}
