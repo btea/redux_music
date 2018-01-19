@@ -12,6 +12,7 @@
 .total  i{
     font-size: 30px;
     margin-top: 5px;
+    color: #3b2e7e;
 }
 .icon_total .total_num{
     display: inline-block;
@@ -61,6 +62,7 @@
 .list_show .single_List .icon i{
     font-size: 30px;
     margin-top: 5px;
+    color: #3b2e7e;
 }
 .list_show .single_List .singer_name{
     float: left;

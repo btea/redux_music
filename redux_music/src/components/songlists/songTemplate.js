@@ -2,7 +2,8 @@ import React from 'react'
 import * as fetch from '../../fetch/index'
 
 export default class SongTemplate extends React.Component{
-    play(){
+    // 点击的时候播放
+    playStart(){
         console.log(this.props);
         let target = this.props.item;
         fetch.songDetail(target.id).then(res => {
@@ -12,7 +13,9 @@ export default class SongTemplate extends React.Component{
                     picUrl: target.al.picUrl,
                     url: play.url,
                     name: target.name,
-                    singer: target.ar[0].name
+                    singer: target.ar[0].name,
+                    play: true,
+                    time: target.dt
                 });
             })
         })
@@ -22,7 +25,7 @@ export default class SongTemplate extends React.Component{
         let item = this.props.item;
         let index = this.props.index;
         return(
-                <li className="single_List" onClick={() => this.play()} data-id={item.id}>
+                <li className="single_List" onClick={() => this.playStart()} data-id={item.id}>
                     <div className="index">
                         {index + 1}
                     </div>

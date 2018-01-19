@@ -4,7 +4,6 @@ import {bindActionCreators} from 'redux'
 import * as Actions from './actions/index'
 import * as fetch from './fetch/index'
 import PlayList from './components/playlist'
-import {songlist} from "./actions/index";
 
 class App extends React.Component{
     componentDidMount(){

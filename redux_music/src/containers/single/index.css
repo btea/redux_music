@@ -67,6 +67,10 @@ body,ul,li{
 .playlist_detail .container .count i{
     font-size: 15px;
 }
+.playlist_detail .container .count .play_count{
+    font-size: 12px;
+    vertical-align: text-top;
+}
 .container .detail_cover .name_creator{
     float: left;
     width: calc(100% - 140px);

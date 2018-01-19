@@ -27,9 +27,3 @@ export function playInfo(list){
         info: list
     }
 }
-// 当前正在播放音乐状态
-export function playStatus() {
-    return {
-        type: 'SWITCH'
-    }
-}

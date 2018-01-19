@@ -4,7 +4,7 @@
     bottom: 0;
     height: 40px;
     width: 100%;
-    background: #ffffff;
+    background:rgba(96,141,174,.7);;
 }
 .bottom_player:after{
     content: '';
@@ -20,7 +20,10 @@
     height: 30px;
     margin: 5px 15px;
 }
-.bottom_player .play_pause i{font-size: 30px;}
+.bottom_player .play_pause i{
+    font-size: 30px;
+    color: #fff;
+}
 .bottom_player .play_img img{
     width: 30px;
     height: 30px;
@@ -43,4 +46,7 @@
 }
 .bottom_player a{
     text-decoration: none;
+}
+#canvas{
+    position: absolute;
 }

@@ -5,7 +5,7 @@ import SongTemplate from './songTemplate'
 export default class SongList extends React.Component{
 
     render(){
-        console.log(this.props)
+
         let listInfo = this.props.list;
         return(
             <div className="song_list">

@@ -5,7 +5,7 @@ import {createStore,compose} from 'redux'
 import reducers from './reducers/index'
 import Links from './route/index'
 import './iconfont/material-icons.css';
-
+import './index.css'
 
 let store = createStore(
     reducers,

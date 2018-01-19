@@ -10,14 +10,13 @@ import {bindActionCreators} from 'redux'
 
 class Links extends React.Component{
     render(){
-        console.log(this.props);
         return(
             <Router>
                 <div>
                     <Route exact path="/" component={App}/>
                     <Route path="/single/:listid" component={Single}/>
                     <Route path="/playInterface" component={PlayInterface} />
-                    <Player info={this.props.playInfo} statu={this.props.action.playStatus} status={this.props.status}/>
+                    <Player info={this.props.playInfo} playInfo={this.props.action.playInfo} />
                 </div>
             </Router>
         )
@@ -25,8 +24,7 @@ class Links extends React.Component{
 }
 function mapStateToProps(state){
     return{
-        playInfo: state.playInfo,
-        status: state.playStatus
+        playInfo: state.playInfo
     }
 }
 function mapDispatchToProps(dispatch) {
