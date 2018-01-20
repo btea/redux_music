@@ -46,7 +46,6 @@ export default class Player extends React.Component{
         }
     }
     componentDidMount(){
-        console.log(this.props);
         // 动画
 
         this.ring(-0.5)

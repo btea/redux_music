@@ -53,7 +53,6 @@ function playInfo(state = {
     commentShow: false, /*是否展示评论*/
     startTop: [] /*存放歌词每一行的滚动高度*/
 },action){
-    console.log(action);
     switch (action.type){
         case 'PLAY':
             return Object.assign({},state,action.info);

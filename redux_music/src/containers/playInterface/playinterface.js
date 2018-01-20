@@ -1,13 +1,11 @@
 import React from 'react'
 import './playinterface.css'
-export default class PlayInterface extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            state: this.props.location.state,
-            playInfo: this.props.location.fun
-        }
-    }
+import * as Actions from '../../actions/index'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+
+class PlayInterface extends React.Component{
     // 播放界面需要用到的数据
     // 已经缓冲的进度
     // 已经播放的进度/当前时间
@@ -19,7 +17,7 @@ export default class PlayInterface extends React.Component{
     // ...
     componentWillMount(){
 
-        this.props.location.fun({
+        this.props.actions.playInfo({
             isShow: false
         });
     }
@@ -32,14 +30,14 @@ export default class PlayInterface extends React.Component{
 
     componentWillUnmount(){
         // 离开组件之后底部播放栏重新开始显示
-        this.props.location.state.fun({
+        this.props.actions.playInfo({
             isShow: true
         });
     }
     // 修改播放状态
     play(){
-        let state = this.props.location.state;
-        let playInfo = this.props.location.fun;
+        let state = this.props.info;
+        let playInfo = this.props.actions.playInfo;
         let audio = this.props.location.target;
         if(state.play){
             audio.pause();
@@ -52,22 +50,16 @@ export default class PlayInterface extends React.Component{
                 play: true
             })
         }
-        // console.log(state.play);
-        // console.log(playInfo);
-        // console.log(this.props);
-        // console.log(this.props.location.state)
-        // console.log(this.props.location.fun)
     }
-
-
     // 返回上一级
     back(){
         window.history.go(-1);
     }
+
+
     render(){
-        // console.log(this.props.location);
-        let state = this.props.location.state;
-        let playInfo = this.props.location.fun;
+        let state = this.props.info;
+        let playInfo = this.props.actions.playInfo;
         return(
             <div>
                 <div className="single_music">
@@ -87,9 +79,9 @@ export default class PlayInterface extends React.Component{
                         <div className="lyric" style={{zIndex: state.lyricShow ? 1 : 0}}>
                             <div className="lyric_show" style={{top: state.top + 'px'}} >
                                 {/*{*/}
-                                    {/*this.state.lyric.map((item,index) => {*/}
-                                        {/*return <p key={index} data-time={item.time.slice(1,6)} className={index === this.state.cur ? 'line_lyric show':'line_lyric'}>{item.lyric}</p>*/}
-                                    {/*})*/}
+                                {/*this.state.lyric.map((item,index) => {*/}
+                                {/*return <p key={index} data-time={item.time.slice(1,6)} className={index === this.state.cur ? 'line_lyric show':'line_lyric'}>{item.lyric}</p>*/}
+                                {/*})*/}
                                 {/*}*/}
                             </div>
                         </div>
@@ -110,7 +102,7 @@ export default class PlayInterface extends React.Component{
                     </div>
                     {/*播放进度条*/}
                     <footer className="progress_bar">
-                        <span className="played_time">{time_show(state.played)}</span>
+                        <span className="played_time">{time_show(state.currentTime*1000)}</span>
                         <div className="rate" ref="pro_bar_w">
                             <div className="buffer" >
                                 {/*{time_show(this.state.buffer)}*/}
@@ -118,7 +110,7 @@ export default class PlayInterface extends React.Component{
                             <div className="played" >
                             </div>
                         </div>
-                        <span className="total_time">{time_show(state.duration)}</span>
+                        <span className="total_time">{time_show(state.time)}</span>
 
                         <div className="button_list">
                             <div className="per">
@@ -135,15 +127,29 @@ export default class PlayInterface extends React.Component{
                     </footer>
                 </div>
                 {/*<div className="comments_show" style={{display: state.commentShow ? 'block' : 'none'}}>*/}
-                    {/*<Comment comments={this.state.comments} commentState={this.commentStatus.bind(this)} id={this.props.location.state.id} bgImg={this.props.location.state.picUrl}/>*/}
+                {/*<Comment comments={this.state.comments} commentState={this.commentStatus.bind(this)} id={this.props.location.state.id} bgImg={this.props.location.state.picUrl}/>*/}
                 {/*</div>*/}
             </div>
+
         )
 
     }
 }
 
-// 播放进度
+function mapStateToProps(state){
+    return {
+        info: state.playInfo
+    }
+}
+function mapDispatchToProps(dispatch){
+    return {
+        actions: bindActionCreators(Actions,dispatch)
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(PlayInterface)
+
+ // 播放进度
 function time_show(time){
     if(time){
         let minutes = Math.floor(time/1000/60);
