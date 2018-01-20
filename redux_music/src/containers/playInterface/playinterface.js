@@ -19,7 +19,7 @@ export default class PlayInterface extends React.Component{
     // ...
     componentWillMount(){
 
-        this.state.playInfo({
+        this.props.location.fun({
             isShow: false
         });
     }
@@ -32,24 +32,47 @@ export default class PlayInterface extends React.Component{
 
     componentWillUnmount(){
         // 离开组件之后底部播放栏重新开始显示
-        this.state.playInfo({
+        this.props.location.state.fun({
             isShow: true
         });
     }
     // 修改播放状态
     play(){
-
+        let state = this.props.location.state;
+        let playInfo = this.props.location.fun;
+        let audio = this.props.location.target;
+        if(state.play){
+            audio.pause();
+            playInfo({
+                play: false
+            })
+        }else{
+            audio.play();
+            playInfo({
+                play: true
+            })
+        }
+        // console.log(state.play);
+        // console.log(playInfo);
+        // console.log(this.props);
+        // console.log(this.props.location.state)
+        // console.log(this.props.location.fun)
     }
 
 
+    // 返回上一级
+    back(){
+        window.history.go(-1);
+    }
     render(){
-        let state = this.state.state;
-        let playInfo = this.state.playInfo;
+        // console.log(this.props.location);
+        let state = this.props.location.state;
+        let playInfo = this.props.location.fun;
         return(
             <div>
                 <div className="single_music">
                     <header className="back">
-                        <i className="material-icons">arrow_back</i>
+                        <i className="material-icons" onClick={() => {this.back()}}>arrow_back</i>
                         <div className="name">{state.name}</div>
                         <div className="arname">{state.singer}</div>
                     </header>
@@ -101,7 +124,7 @@ export default class PlayInterface extends React.Component{
                             <div className="per">
                                 <i className="material-icons">skip_previous</i>
                             </div>
-                            <div className="play_pause" onClick={() => playInfo({play: !state.play})}>
+                            <div className="play_pause" onClick={() => {this.play()}}>
                                 <i className="material-icons" style={{display: state.play ? 'block':'none'}}>pause</i>
                                 <i className="material-icons" style={{display: state.play ? 'none':'block'}}>play_arrow</i>
                             </div>

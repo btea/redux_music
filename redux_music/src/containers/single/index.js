@@ -19,7 +19,6 @@ class Single extends React.Component{
     }
 
     render(){
-        console.log(this.props);
         let list = this.props.list;
         if(list){
             return(

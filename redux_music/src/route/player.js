@@ -80,11 +80,11 @@ export default class Player extends React.Component{
     render(){
         let info = this.props.info;
         let status = info.play;
-        let data = this.props.info;
         let path = {
             pathname: '/playInterface',
-            state: data,
-            fun: this.props.playInfo
+            state: info,
+            fun: this.props.playInfo,
+            target: this.refs.audio
         };
         return(
             <div className="bottom_player" style={{display: info.isShow ? 'block' : 'none'}}>
