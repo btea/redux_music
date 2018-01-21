@@ -3,7 +3,7 @@ import './playinterface.css'
 import * as Actions from '../../actions/index'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import * as fetch from '../../fetch/index'
 
 class PlayInterface extends React.Component{
     // 播放界面需要用到的数据
@@ -24,8 +24,62 @@ class PlayInterface extends React.Component{
 
 
     componentDidMount(){
+        console.log(this.props);
+        console.log(fetch);
+        fetch.lyric(this.props.info.id).then(res => {
+            res.json().then(response => {
+                if(response.nolyric){
+                    this.props.actions.playInfo({
+                        lyric: [{
+                            lyric: '纯音乐，请欣赏',
+                            time: '[00:00:00]'
+                        }]
+                    })
+                }else{
+                    this.lyricFormat(response.lrc.lyric);
+                    console.log(response);
+                }
+            })
+        })
 
-
+    }
+    lyricFormat(lyric){
+        if(lyric){
+            // 匹配时间(数组)(时间包含毫秒)
+            let reg = new RegExp(/\[.{8,9}\]/);
+            let newReg = new RegExp(/\[.{2}\:.{2}\]/); //时间只包含分秒，包括冒号只有五位
+            // newLyr(数组)(包含时间和歌词);
+            let newLyr = lyric.split(/\n/);
+            newLyr.splice(newLyr.length - 1,1);//删除最后一段多余  最后一段似乎可不删除？
+            // 匹配了时间之后新的歌词
+            // 处理时间只有五位的歌词
+            for(let i = 0; i < newLyr.length; i++){
+                if(newReg.test(newLyr[i])){
+                    newLyr[i] = '[' + newLyr[i].split(/\[|\]/)[1] + '.00]' + newLyr[i].split(/\[|\]/)[2]
+                }
+            }
+            for(let i = 0; i < newLyr.length; i++){
+                if(!reg.test(newLyr[i])){
+                    newLyr[i] = '[00:00:00]' + newLyr[i];
+                }
+            }
+            let newLyric = newLyr.join('\n');
+            let lastTime = newLyric.match(/\[.{8,9}\]/g);
+            let lastLyric = newLyric.split(reg);
+            lastLyric.splice(0,1);
+            lastTime.push(time_show(this.props.info.time));
+            lastLyric.push('');
+            let lyricInf = [];
+            for(let i = 0; i < lastTime.length; i++){
+                lyricInf.push({
+                    time: lastTime[i],
+                    lyric: lastLyric[i]
+                })
+            }
+            this.props.actions.playInfo({
+                lyric: lyricInf
+            })
+        }
     }
 
     componentWillUnmount(){
@@ -59,6 +113,7 @@ class PlayInterface extends React.Component{
 
     render(){
         let state = this.props.info;
+        console.log(state);
         let playInfo = this.props.actions.playInfo;
         return(
             <div>
@@ -78,11 +133,12 @@ class PlayInterface extends React.Component{
                         </div>
                         <div className="lyric" style={{zIndex: state.lyricShow ? 1 : 0}}>
                             <div className="lyric_show" style={{top: state.top + 'px'}} >
-                                {/*{*/}
-                                {/*this.state.lyric.map((item,index) => {*/}
-                                {/*return <p key={index} data-time={item.time.slice(1,6)} className={index === this.state.cur ? 'line_lyric show':'line_lyric'}>{item.lyric}</p>*/}
-                                {/*})*/}
-                                {/*}*/}
+                                {
+                                    this.props.info.lyric ?
+                                        this.props.info.lyric.map((item,index) => {
+                                            return <p key={index} data-time={item.time.slice(1,6)} className={index === this.props.info.cur ? 'line_lyric show':'line_lyric'}>{item.lyric}</p>
+                                        }) : ''
+                                }
                             </div>
                         </div>
                         <div className="bg_animation" style={{zIndex: state.lyricShow ? 0 : 1}} >

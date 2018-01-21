@@ -81,8 +81,6 @@ export default class Player extends React.Component{
         let status = info.play;
         let path = {
             pathname: '/playInterface',
-            state: info,
-            fun: this.props.playInfo,
             target: this.refs.audio
         };
         return(

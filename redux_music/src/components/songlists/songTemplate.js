@@ -15,7 +15,8 @@ export default class SongTemplate extends React.Component{
                     name: target.name,
                     singer: target.ar[0].name,
                     play: true,
-                    time: target.dt
+                    time: target.dt,
+                    id: target.id
                 });
             })
         })

@@ -35,6 +35,8 @@ function playInfo(state = {
     url: 'https://m7.music.126.net/20180119101807/5636706af46e35e5be5f849f69a746a1/ymusic/a8f8/4db5/48a4/f8a85686e7fc0d894b6d9f210500ff37.mp3',
     name: '牵丝戏',
     singer: '银临',
+    id: 30352891,
+    cur: 0,
     play: false, // 播放状态
     time: 0, //歌曲时间
     isShow: true, //底部播放栏是否显示
@@ -43,7 +45,6 @@ function playInfo(state = {
     lyricShow: false, /*是否显示歌词*/
     lyric: null, /*获取的歌词*/
     tlyric: null, /*需要翻译的歌词，翻译之后*/
-    lyricTime: null, /*歌曲时间分布*/
     volume: 0.5, /*歌曲音量大小*/
     // marginTop: 235, /*歌词展示默认位置*/
     zIndex: false, /*显示歌词还是显示动画*/
