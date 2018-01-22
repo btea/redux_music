@@ -54,10 +54,12 @@ class PlayInterface extends React.Component{
         // 获取评论
         fetch.comment(this.props.info.id,0).then(res => {
             res.json().then(response => {
+                console.log(response);
                 let comment_list = {
                     total: response.total,
                     hotComments: response.hotComments,
-                    comments: response.comments
+                    comments: response.comments,
+                    page: 1
                 };
                 this.props.actions.comments(comment_list);
             })
@@ -147,7 +149,9 @@ class PlayInterface extends React.Component{
         let playInfo = this.props.actions.playInfo;
         let path = {
             pathname: '/comment',
-            data: this.props.comments
+            data: this.props.comments,
+            getComment: this.props.actions.comments,
+            id: this.props.info.id
         };
         return(
             <div>

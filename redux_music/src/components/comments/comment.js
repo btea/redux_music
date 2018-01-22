@@ -1,6 +1,6 @@
-import React from 'react';
-import SingleComment from './singleComment';
-import FetchData from '../../fetch/fetch';
+import React from 'react'
+import SingleComment from './singleComment'
+import * as fetch  from '../../fetch/index'
 import './comment.css'
 
 export default class Comment extends React.Component{
@@ -46,6 +46,21 @@ export default class Comment extends React.Component{
     //     }
     //
     // }
+    obtain(){
+        let id = this.props.location.id;
+        let page = this.props.location.data.page;
+        fetch.comment(id,page).then(res => {
+            res.json().then(response => {
+                // this.props.location.getComment
+                let list = {
+                    comments: this.props.location.data.comments.concat(response.comments),
+                    id: id +1
+                };
+                this.props.location.getComment(list);
+                console.log(response);
+            })
+        })
+    }
 
     // componentDidMount(){
     //     window.addEventListener('scroll',() => {
@@ -67,6 +82,7 @@ export default class Comment extends React.Component{
         window.history.go(-1);
     }
     render(){
+        console.log(this.props.location);
         let comment = this.props.location.data;
         return(
             <div className="comment_list" ref="comment_list">
@@ -93,7 +109,7 @@ export default class Comment extends React.Component{
                 {/*<div className="refresh" style={{display: this.state.loading ? 'block' : 'none'}}>*/}
                     {/*<i className="material-icons">refresh</i>*/}
                 {/*</div>*/}
-                {/*<button onClick={() => this.getComment()}>加载更多</button>*/}
+                <button onClick={() => this.obtain()}>加载更多</button>
             </div>
         )
     }
