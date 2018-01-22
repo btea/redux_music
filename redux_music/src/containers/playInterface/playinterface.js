@@ -4,6 +4,7 @@ import * as Actions from '../../actions/index'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as fetch from '../../fetch/index'
+import {Link} from 'react-router-dom'
 
 class PlayInterface extends React.Component{
     // 播放界面需要用到的数据
@@ -24,8 +25,12 @@ class PlayInterface extends React.Component{
 
 
     componentDidMount(){
-        console.log(this.props);
-        console.log(fetch);
+        let container = this.refs.container;
+        let bar = this.refs.pro_bar_w;
+        let style = window.getComputedStyle(container,null) || container.currentStyle;
+        let height = +style.height.split('px')[0];
+        let styles = window.getComputedStyle(bar,null) || bar.currentStyle;
+        let barWidth = +styles.width.split('px')[0];
         fetch.lyric(this.props.info.id).then(res => {
             res.json().then(response => {
                 if(response.nolyric){
@@ -33,15 +38,30 @@ class PlayInterface extends React.Component{
                         lyric: [{
                             lyric: '纯音乐，请欣赏',
                             time: '[00:00:00]'
-                        }]
+                        }],
+                        containerHeight: height,
+                        barWidth: barWidth
                     })
                 }else{
-                    this.lyricFormat(response.lrc.lyric);
-                    console.log(response);
+                    this.props.actions.playInfo({
+                        lyric: this.lyricFormat(response.lrc.lyric),
+                        containerHeight: height,
+                        barWidth: barWidth
+                    })
                 }
             })
+        });
+        // 获取评论
+        fetch.comment(this.props.info.id,0).then(res => {
+            res.json().then(response => {
+                let comment_list = {
+                    total: response.total,
+                    hotComments: response.hotComments,
+                    comments: response.comments
+                };
+                this.props.actions.comments(comment_list);
+            })
         })
-
     }
     lyricFormat(lyric){
         if(lyric){
@@ -67,7 +87,7 @@ class PlayInterface extends React.Component{
             let lastTime = newLyric.match(/\[.{8,9}\]/g);
             let lastLyric = newLyric.split(reg);
             lastLyric.splice(0,1);
-            lastTime.push(time_show(this.props.info.time));
+            lastTime.push('[' + time_show(this.props.info.time) + '.000]');
             lastLyric.push('');
             let lyricInf = [];
             for(let i = 0; i < lastTime.length; i++){
@@ -76,23 +96,25 @@ class PlayInterface extends React.Component{
                     lyric: lastLyric[i]
                 })
             }
-            this.props.actions.playInfo({
-                lyric: lyricInf
-            })
+            return lyricInf;
+
         }
     }
 
     componentWillUnmount(){
+
         // 离开组件之后底部播放栏重新开始显示
         this.props.actions.playInfo({
-            isShow: true
+            isShow: true,
+            lyricShow: false
         });
     }
     // 修改播放状态
     play(){
         let state = this.props.info;
         let playInfo = this.props.actions.playInfo;
-        let audio = this.props.location.target;
+        let audio = document.getElementsByTagName('audio')[0];
+        // let audio = this.props.location.target;
         if(state.play){
             audio.pause();
             playInfo({
@@ -105,16 +127,28 @@ class PlayInterface extends React.Component{
             })
         }
     }
+
     // 返回上一级
     back(){
         window.history.go(-1);
     }
 
+    // 显示播放动画还是显示歌词
+    lyricShow(){
+        this.props.actions.playInfo({
+            lyricShow: !this.props.info.lyricShow
+        })
+    }
+
 
     render(){
         let state = this.props.info;
-        console.log(state);
+        // console.log(state);
         let playInfo = this.props.actions.playInfo;
+        let path = {
+            pathname: '/comment',
+            data: this.props.comments
+        };
         return(
             <div>
                 <div className="single_music">
@@ -125,14 +159,14 @@ class PlayInterface extends React.Component{
                     </header>
 
                     {/*播放动画*/}
-                    <div className="container" ref='container'>
+                    <div className="container" ref='container' onClick={() => {this.lyricShow()}}>
                         <i className="material-icons volume" style={{zIndex: state.lyricShow ? 1 : 0}}>volume_up</i>
                         <div className="volume_bar" style={{zIndex: state.lyricShow ? 1 : 0}}>
                             <div className="current_volume"  style={{width: state.volume*100 + '%'}}></div>
                             <div className="dot"></div>
                         </div>
                         <div className="lyric" style={{zIndex: state.lyricShow ? 1 : 0}}>
-                            <div className="lyric_show" style={{top: state.top + 'px'}} >
+                            <div className="lyric_show" style={{top: this.props.info.top + 'px'}} >
                                 {
                                     this.props.info.lyric ?
                                         this.props.info.lyric.map((item,index) => {
@@ -142,15 +176,17 @@ class PlayInterface extends React.Component{
                             </div>
                         </div>
                         <div className="bg_animation" style={{zIndex: state.lyricShow ? 0 : 1}} >
-                            {/*<img src={state.picUrl} alt="" style={{animationPlayState: pause}} />*/}
+                            <img src={state.picUrl} alt="" style={{animationPlayState: state.play ? 'running' : 'paused'}}/>
                             <div className="download_dis_icon" style={{display: state.lyricShow ? 'none' : 'block'}}>
                                 <i className="material-icons" style={{display: state.favorite ? 'inline-block': 'none'}} >favorite</i>
                                 <i className="material-icons" style={{display: state.favorite ? 'none' : 'inline-block'}} >favorite_border</i>
                                 <i className="material-icons" >arrow_downward<a ref="download"></a></i>
-                                <span className="comment">
-                                    <i className="material-icons" >message</i>
-                                    <span className="total">{state.commentTotal > 999 ? '999+' : state.commentTotal > 99 ? '99+' : state.commentTotal}</span>
-                                </span>
+                                <Link to={path}>
+                                     <span className="comment">
+                                        <i className="material-icons" >message</i>
+                                        <span className="com_total">{this.props.comments.total > 999 ? '999+' : this.props.comments.total > 99 ? '99+' : this.props.comments.total}</span>
+                                    </span>
+                                </Link>
                                 <i className="material-icons">more_vert</i>
                             </div>
                         </div>
@@ -160,10 +196,10 @@ class PlayInterface extends React.Component{
                     <footer className="progress_bar">
                         <span className="played_time">{time_show(state.currentTime*1000)}</span>
                         <div className="rate" ref="pro_bar_w">
-                            <div className="buffer" >
-                                {/*{time_show(this.state.buffer)}*/}
+                            <div className="buffer" style={{width: state.buffered  * 1000 / state.time * state.barWidth + 'px'}}>
+                                {/*{time_show(state.buffered)}*/}
                             </div>
-                            <div className="played" >
+                            <div className="played" style={{width: state.currentTime * 1000 / state.time * state.barWidth + 'px'}}>
                             </div>
                         </div>
                         <span className="total_time">{time_show(state.time)}</span>
@@ -194,7 +230,8 @@ class PlayInterface extends React.Component{
 
 function mapStateToProps(state){
     return {
-        info: state.playInfo
+        info: state.playInfo,
+        comments: state.comments
     }
 }
 function mapDispatchToProps(dispatch){

@@ -8,7 +8,6 @@ export default class PlayList extends React.Component{
     }
 
     render(){
-        console.log(this.props);
         return(
             <div className="playlist_box">
                 {

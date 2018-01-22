@@ -18,33 +18,99 @@ export default class Player extends React.Component{
     //         return false;
     //     }
     // }
-
+    // 监听音频播放进度
     song(){
         let time = this.props.info.time;
         let audio = this.refs.audio;
         let curTime = audio.currentTime;
-
-        try {
+        if(audio.buffered.length){
             let buffered = audio.buffered.end(0);
             this.props.playInfo({
                 currentTime: curTime,
                 percentage: curTime * 1000 / time,
                 buffered: buffered
             });
-        }catch(err){
-            console.log(err);
         }
+        // try {
+        //     let buffered = audio.buffered.end(0);
+        //     this.props.playInfo({
+        //         currentTime: curTime,
+        //         percentage: curTime * 1000 / time,
+        //         buffered: buffered
+        //     });
+        // }catch(err){
+        //     console.log(err);
+        // }
 
         if(audio.ended){
             this.props.playInfo({
                 play: false
             })
         }else{
-            // console.log(this.props);
-            // let percentage = curTime * 1000 / time * 2;
             this.ring(this.props.info.percentage * 2 - 0.5);
         }
+
+        if(this.props.info.lyricTime){
+            let h = this.props.info.containerHeight;
+            let time = time_show(curTime*1000); //当前播放时间
+            for(let i = 0; i < this.props.info.lyricTime.length; i++){
+                if(this.props.info.lyricTime[i] !== '00:00'){
+                    if(time >= this.props.info.lyricTime[i] && time < this.props.info.lyricTime[i+1]){
+                        this.props.playInfo({
+                            cur: i,
+                            top: h/2 - 15 - this.totalTop(i)
+                        });
+                    }
+                }
+            }
+        }else{
+            if(this.props.info.lyric){
+                let p = document.querySelectorAll('.lyric_show p')
+                let lyricTime = [];
+                for(let  i = 0; i < this.props.info.lyric.length; i++){
+                    lyricTime.push(this.props.info.lyric[i].time.slice(1,6));
+                }
+                this.props.playInfo({
+                    lyricTime: lyricTime,
+                    startTop: this.startTop(p)
+                })
+            }
+            // let p = document.querySelectorAll('.lyric_show p');
+            // if(p.length){
+            //     let lyricTime = [];
+            //     for(let  i = 0; i < p.length; i++){
+            //         lyricTime.push(p[i].dataset.time);
+            //     }
+            //     this.props.playInfo({
+            //         lyricTime: lyricTime,
+            //         startTop: this.startTop(p)
+            //     })
+            // }
+        }
     }
+    // 获取每一行歌词的高度
+    startTop(list){
+        let style,height;
+        let total = [];
+        for(let i = 0; i < list.length; i++){
+            style = window.getComputedStyle(list[i],null) || list[i].currentStyle;
+            height = +style.height.split('px')[0];
+            total.push(height);
+        }
+        return total;
+    }
+
+    // 计算当前滚动总高度
+    totalTop(i){
+        let num = 0;
+        let arr = this.props.info.startTop;
+        for(let j = 0; j < i; j++){
+            num += arr[j];
+        }
+        return num;
+    }
+
+
     componentDidMount(){
         // 动画
 
@@ -90,7 +156,7 @@ export default class Player extends React.Component{
                         <img src={info.picUrl} alt=""/>
                     </Link>
                 </div>
-                <audio src={info.url} ref="audio" onTimeUpdate={() => {this.song()}}>
+                <audio src={info.url || require('../source/qiansixi.mp3')} ref="audio" onTimeUpdate={() => {this.song()}}>
                 </audio>
                 <div className="play_message">
                     <Link to= {path}>
@@ -110,4 +176,17 @@ export default class Player extends React.Component{
             </div>
         )
     }
+}
+
+function time_show(time){
+    if(time){
+        let minutes = Math.floor(time/1000/60);
+        let seconds = Math.floor(time/1000 - minutes*60);
+        minutes = minutes >= 10 ? minutes : '0' + minutes;
+        seconds = seconds >= 10 ? seconds : '0' + seconds;
+        return minutes + ':' + seconds;
+    }else{
+        return '00:00';
+    }
+
 }

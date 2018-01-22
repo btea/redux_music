@@ -32,13 +32,13 @@ function coverStatus(state = false,action){
 // 保存当前正在播放歌曲信息  底部播放栏和跳转之后播放页面引用同一数据源（包括url以时间、显示状态等）
 function playInfo(state = {
     picUrl: 'https://p1.music.126.net/Nd86SOcyCxU5Qu7jdZn_MQ==/7725168696876736.jpg',
-    url: 'https://m7.music.126.net/20180119101807/5636706af46e35e5be5f849f69a746a1/ymusic/a8f8/4db5/48a4/f8a85686e7fc0d894b6d9f210500ff37.mp3',
+    url: '',
     name: '牵丝戏',
     singer: '银临',
     id: 30352891,
     cur: 0,
     play: false, // 播放状态
-    time: 0, //歌曲时间
+    time: 239128, //歌曲时间
     isShow: true, //底部播放栏是否显示
     buffered: 0, // 缓冲进度
     currentTime: 0, //当前播放时间
@@ -52,7 +52,11 @@ function playInfo(state = {
     comments: null, /*评论内容*/
     favorite: false, /*是否喜欢*/
     commentShow: false, /*是否展示评论*/
-    startTop: [] /*存放歌词每一行的滚动高度*/
+    startTop: [], /*存放歌词每一行的滚动高度*/
+    containerHeight: 0, /*滚动歌词展示栏高度*/
+    lyricTime: null, /*歌曲时间分布*/
+    barWidth: 0, /*进度条长度*/
+    playIndex: null
 },action){
     switch (action.type){
         case 'PLAY':
@@ -61,8 +65,20 @@ function playInfo(state = {
             return state;
     }
 }
-
-
+// 获取评论
+function comments(state = {
+    total: null,
+    hotComments: null,
+    comments: null,
+    page: 0
+},action) {
+    switch(action.type){
+        case 'COMMENTS':
+            return Object.assign({},state,action.comments);
+        default:
+            return state;
+    }
+}
 
 
 
@@ -70,6 +86,7 @@ let reducers = combineReducers({
     playlist,
     songlist,
     coverStatus,
-    playInfo
+    playInfo,
+    comments
 });
 export default reducers

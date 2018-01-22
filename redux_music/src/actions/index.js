@@ -27,3 +27,10 @@ export function playInfo(list){
         info: list
     }
 }
+
+export function comments(comments) {
+    return {
+        type: 'COMMENTS',
+        comments: comments
+    }
+}

@@ -8,6 +8,7 @@ export default class SongTemplate extends React.Component{
         let target = this.props.item;
         fetch.songDetail(target.id).then(res => {
             res.json().then(response => {
+                let h = this.props.item.containerHeight;
                 let play = response.data[0];
                 this.props.play({
                     picUrl: target.al.picUrl,
@@ -16,7 +17,12 @@ export default class SongTemplate extends React.Component{
                     singer: target.ar[0].name,
                     play: true,
                     time: target.dt,
-                    id: target.id
+                    id: target.id,
+                    lyricTime: null,
+                    lyric: null,
+                    cur: 0,
+                    top: h/2 - 15,
+                    playIndex: target.index
                 });
             })
         })
@@ -28,6 +34,7 @@ export default class SongTemplate extends React.Component{
         return(
                 <li className="single_List" onClick={() => this.playStart()} data-id={item.id}>
                     <div className="index">
+                        {/*<i className="material-icons">volume_up</i>*/}
                         {index + 1}
                     </div>
                     <div className="singer_name">
