@@ -4,12 +4,73 @@ body{
   font-family: sans-serif;
   background: rgb(96,141,174);
 }
-*{
-  margin: 0;
-  padding: 0;
-}
+/**{*/
+  /*margin: 0;*/
+  /*padding: 0;*/
+/*}*/
 
 .index header{
-  height: 30px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  height: 40px;
+  width: 100%;
+  background: linear-gradient(to right,#f0fcff,#e3f9fd,#c0ebd7);
+  opacity: .85;
+}
+.index header i{
+  color: rgba(112,243,255,.5);
+  font-size: 30px;
+  margin: 5px;
+  /*color: #f0fcff;*/
+}
+.index header div{
+  float: left;
+}
 
+.index header .center_menu{
+  width: calc(100% - 80px);
+  width: -webkit-calc(100% - 80px);
+  width: -moz-calc(100% - 80px);
+  text-align: center;
+}
+.index header .center_menu .active{color: #3eede7;}
+.index header .center_menu i{
+  margin: 5px 15px;
+}
+
+
+.index .nav_title{position: relative;}
+.index .nav_title .title{
+  display: flex;
+  margin-top: 50px;
+}
+.index .nav_title .title span{
+  flex: 1;
+  margin: 10px;
+  text-align: center;
+  color: #fff;
+}
+.index .nav_title .bottom_animation{
+  height: 2px;
+  background: #3eede7;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30%;
+}
+.index .recommend_icon{
+  display: flex;
+  margin: 10px 0;
+}
+.index .recommend_icon span{
+  flex: 1;
+  text-align: center;
+}
+.index .recommend_icon i{
+  font-size: 30px;
+  border-radius: 50%;
+  border: 1px solid rgb(112,243,255);
+  padding: 5px;
 }

@@ -27,10 +27,18 @@ export function playInfo(list){
         info: list
     }
 }
-
+// 评论保存
 export function comments(comments) {
     return {
         type: 'COMMENTS',
         comments: comments
+    }
+}
+
+// 主页面index状态数据保存
+export function indexStatus(change){
+    return {
+        type: 'CHANGE',
+        change: change
     }
 }

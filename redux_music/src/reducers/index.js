@@ -1,5 +1,18 @@
 import {combineReducers} from 'redux'
 
+// 保存封面各组件的状态
+function indexStatus(state = {
+    index: 1, /*封面顶部高亮显示的字体图标下标*/
+    sidebar: false /*侧边栏个人资料是否显示*/
+},action) {
+    switch (action.type){
+        case 'CHANGE':
+            return Object.assign({},state,action.change);
+        default:
+            return state;
+    }
+}
+
 function playlist(state = [],action){
     switch(action.type){
         case 'PLAYLIST_REFRESH':
@@ -90,6 +103,7 @@ let reducers = combineReducers({
     songlist,
     coverStatus,
     playInfo,
-    comments
+    comments,
+    indexStatus
 });
 export default reducers
