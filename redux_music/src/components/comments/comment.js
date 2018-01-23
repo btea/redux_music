@@ -1,9 +1,12 @@
 import React from 'react'
 import SingleComment from './singleComment'
 import * as fetch  from '../../fetch/index'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import * as Actions from '../../actions/index'
 import './comment.css'
 
-export default class Comment extends React.Component{
+class Comment extends React.Component{
     // constructor(props){
     //     super(props);
     //     this.state = {
@@ -47,70 +50,94 @@ export default class Comment extends React.Component{
     //
     // }
     obtain(){
-        let id = this.props.location.id;
-        let page = this.props.location.data.page;
-        fetch.comment(id,page).then(res => {
-            res.json().then(response => {
-                // this.props.location.getComment
-                let list = {
-                    comments: this.props.location.data.comments.concat(response.comments),
-                    id: id +1
-                };
-                this.props.location.getComment(list);
-                console.log(response);
+        if(this.props.comments.more){
+            let id = this.props.comments.id;
+            let page = this.props.comments.page;
+            this.props.actions.comments({
+                loading: true
+            });
+            fetch.comment(id,page).then(res => {
+                res.json().then(response => {
+                    let list = {
+                        comments: this.props.comments.comments.concat(response.comments),
+                        page: page +1,
+                        loading: false,
+                        more: response.more
+                    };
+                    this.props.actions.comments(list);
+                    console.log(response);
+                })
             })
-        })
+        }else{
+            alert('没有更多评论了');
+        }
     }
 
-    // componentDidMount(){
-    //     window.addEventListener('scroll',() => {
-    //         let target = this.refs.comment_list;
-    //         if(target){
-    //             let style = window.getComputedStyle(target,null) || target.currentStyle;
-    //             let height = +style.height.split('px')[0];
-    //             let viewHeight = document.documentElement.clientHeight;
-    //             let scrollTop = document.documentElement.scrollTop;
-    //             // 最大值40
-    //             if(scrollTop + viewHeight - height >= 10){
-    //                 this.getComment();
-    //             }
-    //         }
-    //
-    //     })
-    // }
+    componentDidMount(){
+        // 滚动加载
+        window.addEventListener('scroll',() => {
+            let target = this.refs.comment_list;
+            if(target){
+                let style = window.getComputedStyle(target,null) || target.currentStyle;
+                let height = +style.height.split('px')[0];
+                let viewHeight = document.documentElement.clientHeight;
+                let scrollTop = document.documentElement.scrollTop;
+                // 最大值40
+                if(scrollTop + viewHeight - height >= 30){
+                    this.obtain();
+                }
+            }
+
+        })
+    }
     back(){
         window.history.go(-1);
     }
     render(){
-        console.log(this.props.location);
-        let comment = this.props.location.data;
-        return(
-            <div className="comment_list" ref="comment_list">
-                <div className="header">
-                    <i className="material-icons back" onClick={() => this.back()}>arrow_back</i>
-                    <span>评论({comment.total})</span>
+        let comment = this.props.comments;
+        if(comment){
+            return(
+                <div className="comment_list" ref="comment_list">
+                    <div className="header">
+                        <i className="material-icons back" onClick={() => this.back()}>arrow_back</i>
+                        <span>评论({comment.total})</span>
+                    </div>
+                    <p className="hot_comment_title">精彩评论</p>
+                    <ul className="hot_comment">
+                        {
+                            comment.hotComments.map((item,index) => {
+                                return <SingleComment info={item} key={index}/>
+                            })
+                        }
+                    </ul>
+                    <p className="new_comment">最新评论</p>
+                    <ul className="all_comment">
+                        {
+                            comment.comments.map((item,index) => {
+                                return <SingleComment info={item} key={index}/>
+                            })
+                        }
+                    </ul>
+                    <div className="refresh" style={{display: comment.loading ? 'block' : 'none'}}>
+                        <i className="material-icons">refresh</i>
+                    </div>
                 </div>
-                <p className="hot_comment_title">精彩评论</p>
-                <ul className="hot_comment">
-                    {
-                        comment.hotComments.map((item,index) => {
-                            return <SingleComment info={item} key={index}/>
-                        })
-                    }
-                </ul>
-                <p className="new_comment">最新评论</p>
-                <ul className="all_comment">
-                    {
-                        comment.comments.map((item,index) => {
-                            return <SingleComment info={item} key={index}/>
-                        })
-                    }
-                </ul>
-                {/*<div className="refresh" style={{display: this.state.loading ? 'block' : 'none'}}>*/}
-                    {/*<i className="material-icons">refresh</i>*/}
-                {/*</div>*/}
-                <button onClick={() => this.obtain()}>加载更多</button>
-            </div>
-        )
+            )
+        }else{
+
+        }
     }
 }
+
+function mapStateToProps(state) {
+    return{
+        comments: state.comments
+    }
+}
+function mapDispatchToProps(dispatch){
+    return {
+        actions: bindActionCreators(Actions,dispatch)
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Comment)

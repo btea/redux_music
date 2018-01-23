@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom'
 import './index.css'
 import ListCoverDetail from './listCoverDetail'
 import SongList from '../../components/songlists/index'
+import {Spin} from 'antd'
 
 class Single extends React.Component{
     componentDidMount(){
@@ -15,23 +16,32 @@ class Single extends React.Component{
             res.json().then(response => {
                 this.props.actions.songlist(response.playlist);
             })
+        });
+        window.addEventListener('scroll',() => {
+            let target = this.refs.header;
+            if(target){
+                let num = 50;
+                let top = document.documentElement.scrollTop;
+                let opacity = top / num;
+                if(opacity <= 1){
+                    target.style.opacity = 1 - opacity;
+                }
+            }
         })
     }
-
     render(){
         let list = this.props.list;
-        if(list){
             return(
                 // 阻止滚动穿透  滚动定位进一步完善？？？！！！
                 <div className="playlist_detail" style={{position: this.props.status ? 'fixed' : 'relative'}}>
-                    <header>
+                    <header ref="header">
                         <Link to='/'>
                             <span className="back">
                                   <i className="material-icons">arrow_back</i>
                             </span>
                         </Link>
                         <span className="message">
-                           {list.description}
+                           {list ? list.description : ''}
                         </span>
                         <span className="play_list_song_search">
                             <i className="material-icons">search</i>
@@ -41,17 +51,17 @@ class Single extends React.Component{
                         <div className="container_header">
                             <div className="detail_cover">
                                 <div className="cover_img_playCount" onClick={this.props.actions.listCover}>
-                                    <img src={list.coverImgUrl} alt=""/>
+                                    <img src={list ? list.coverImgUrl : ''} alt=""/>
                                     <span className="count">
                                         <i className="material-icons">headset</i>
-                                        <span className="play_count">{playCount(list.playCount)}</span>
+                                        <span className="play_count">{playCount(list ? list.playCount : null)}</span>
                                     </span>
                                 </div>
                                 <div className="name_creator">
-                                    <h1 className="name">{list.name}</h1>
+                                    <h1 className="name">{list ? list.name : ''}</h1>
                                     <div className="creator">
-                                        <img className="avatar" src={list.creator.avatarUrl} alt=""/>
-                                        <span className="creator_name">{list.creator.nickname}</span>
+                                        <img className="avatar" src={list ? list.creator.avatarUrl : ''} alt=""/>
+                                        <span className="creator_name">{list ? list.creator.nickname : ''}</span>
                                         <i className="material-icons">chevron_right</i>
                                     </div>
                                 </div>
@@ -60,15 +70,15 @@ class Single extends React.Component{
                                 <ul className="icon">
                                     <li className="collection">
                                         <i className="material-icons">collections</i>
-                                        <div className="num">{playCount(list.subscribedCount)}</div>
+                                        <div className="num">{playCount(list ? list.subscribedCount : null)}</div>
                                     </li>
                                     <li className="comment">
                                         <i className="material-icons">chat</i>
-                                        <div className="num">{playCount(list.commentCount)}</div>
+                                        <div className="num">{playCount(list ? list.commentCount : null)}</div>
                                     </li>
                                     <li className="share">
                                         <i className="material-icons">share</i>
-                                        <div className="num">{playCount(list.shareCount)}</div>
+                                        <div className="num">{playCount(list ? list.shareCount : null)}</div>
                                     </li>
                                     <li className="download">
                                         <i className="material-icons">file_download</i>
@@ -77,26 +87,30 @@ class Single extends React.Component{
                                 </ul>
                             </div>
                         </div>
-                        <SongList list={list.tracks} play={this.props.actions.playInfo} />
+                        {
+                            list ? <SongList list={list.tracks} play={this.props.actions.playInfo} /> : <div className="spin">
+                                <Spin />
+                            </div>
+                        }
                     </div>
                     <ListCoverDetail info={list} state={this.props.status} listCover={this.props.actions.listCover}/>
                 </div>
             )
-        }else{
-            return(
-                <div></div>
-            )
-        }
 
     }
 }
 // playCount
 function playCount(count){
-    if(count < 100000){
-        return count;
+    if(count){
+        if(count < 100000){
+            return count;
+        }else{
+            return Math.floor(count / 100000) + '万';
+        }
     }else{
-        return Math.floor(count / 100000) + '万';
+        return '-'
     }
+
 }
 function mapStateToProps(state){
     return {

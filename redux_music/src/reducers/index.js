@@ -67,10 +67,13 @@ function playInfo(state = {
 }
 // 获取评论
 function comments(state = {
+    id: null,
     total: null,
     hotComments: null,
     comments: null,
-    page: 0
+    page: 0,
+    loading: false,  /*是否正在加载*/
+    more: true /*是否还有更多评论*/
 },action) {
     switch(action.type){
         case 'COMMENTS':

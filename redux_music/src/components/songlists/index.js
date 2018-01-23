@@ -1,6 +1,7 @@
 import React from 'react'
 import './index.css'
 import SongTemplate from './songTemplate'
+import {Spin} from 'antd'
 
 export default class SongList extends React.Component{
 
@@ -26,7 +27,7 @@ export default class SongList extends React.Component{
                     {
                         listInfo ?  listInfo.map((item,index) => {
                             return <SongTemplate item = {item} key={index} index={index} play={this.props.play}/>
-                        }) : <div>loading...</div>
+                        }) : <div className="spin"><Spin /></div>
                     }
                 </ul>
             </div>

@@ -1,3 +1,12 @@
+.playlist_box:after{
+    content: '';
+    clear: both;
+    visibility: hidden;
+    display: block;
+    height: 0;
+    line-height: 0;
+    margin-bottom: 30px;
+}
 .playlist_box .list_container{
     position: relative;
     float: left;
