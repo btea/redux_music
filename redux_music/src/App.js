@@ -27,7 +27,7 @@ class App extends React.Component{
                     <div className="center_menu">
                         {
                             icon.map((item,index) => {
-                                return <i key={index} className={this.props.index == index ? 'material-icons active' : "material-icons"}>{item}</i>
+                                return <i key={index} className={this.props.index === index ? 'material-icons active' : "material-icons"}>{item}</i>
                             })
                         }
                     </div>
