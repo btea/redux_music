@@ -57,7 +57,7 @@ function playInfo(state = {
     currentTime: 0, //当前播放时间
     lyricShow: false, /*是否显示歌词*/
     lyric: null, /*获取的歌词*/
-    tlyric: null, /*需要翻译的歌词，翻译之后*/
+    $lyric: null, /*需要翻译的歌词，翻译之后*/
     volume: 0.5, /*歌曲音量大小*/
     // marginTop: 235, /*歌词展示默认位置*/
     zIndex: false, /*显示歌词还是显示动画*/

@@ -43,6 +43,9 @@
     border-top: 1px solid rgba(58,61,6,.4);
     border-bottom: 1px solid rgba(58,61,6,.4);
     margin-top: -1px;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
 }
 .single_List .singer_name,.single_List .icon{
 

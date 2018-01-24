@@ -91,6 +91,7 @@ body,ul,li{
     border-radius: 50%;
     height: 25px;
     width: 25px;
+    vertical-align: top;
 }
 .detail_cover .name_creator .creator{
     margin-top: 10px;

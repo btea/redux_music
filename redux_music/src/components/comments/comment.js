@@ -23,32 +23,6 @@ class Comment extends React.Component{
     //     }
     // }
 
-    // getComment(){
-    //     if(!this.state.isObtain){
-    //         this.setState({
-    //             page: this.state.page + 1,
-    //             isObtain: !this.state.isObtain,
-    //             loading: !this.state.loading
-    //         },() => {
-    //             if(this.state.isMore){
-    //                 FetchData('type=comments&id='+this.state.id + '&limit=20&offset=' + this.state.offset * this.state.page,'get').then(res => {
-    //                     res.json().then(response => {
-    //                         console.log(response);
-    //                         this.setState({
-    //                             commentList: this.state.commentList.concat(response.comments),
-    //                             isMore: response.more,
-    //                             isObtain: !this.state.isObtain,
-    //                             loading: !this.state.loading
-    //                         })
-    //                     })
-    //                 })
-    //             }else{
-    //                 alert('已没有更多评论')
-    //             }
-    //         })
-    //     }
-    //
-    // }
     obtain(){
         if(this.props.comments.more){
             let id = this.props.comments.id;
@@ -65,7 +39,7 @@ class Comment extends React.Component{
                         more: response.more
                     };
                     this.props.actions.comments(list);
-                    console.log(response);
+                    // console.log(response);
                 })
             })
         }else{

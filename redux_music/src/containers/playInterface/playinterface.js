@@ -33,7 +33,8 @@ class PlayInterface extends React.Component{
         let barWidth = +styles.width.split('px')[0];
         fetch.lyric(this.props.info.id).then(res => {
             res.json().then(response => {
-                if(response.nolyric){
+                console.log(response);
+                if(response.nolyric || !response.lrc){
                     this.props.actions.playInfo({
                         lyric: [{
                             lyric: '纯音乐，请欣赏',
@@ -43,8 +44,24 @@ class PlayInterface extends React.Component{
                         barWidth: barWidth
                     })
                 }else{
+                    let lyric = this.lyricFormat(response.lrc.lyric);
+                    // let $lyric = this.lyricFormat(response.tlyric.lyric);
+                    let $lyric;
+                    if(response.tlyric.lyric){
+                        $lyric = this.lyricFormat(response.tlyric.lyric);
+                        for(let i = 0; i < lyric.length; i++){
+                            for(let j = 0; j < $lyric.length; j++){
+                                if (lyric[i].time === $lyric[j].time){
+                                    lyric[i]._lyric = $lyric[j].lyric;
+                                }
+                            }
+                        }
+                    }else{
+                        $lyric = '';
+                    }
                     this.props.actions.playInfo({
-                        lyric: this.lyricFormat(response.lrc.lyric),
+                        lyric: lyric,
+                        $lyric: $lyric,
                         containerHeight: height,
                         barWidth: barWidth
                     })
@@ -72,7 +89,7 @@ class PlayInterface extends React.Component{
             // 匹配时间(数组)(时间包含毫秒)
             let reg = new RegExp(/\[.{8,9}\]/);
             let newReg = new RegExp(/\[.{2}\:.{2}\]/); //时间只包含分秒，包括冒号只有五位
-            // newLyr(数组)(包含时间和歌词);
+            // newLyr(数组)(包含时间和歌词); (静态歌词不包含时间,特殊处理)
             let newLyr = lyric.split(/\n/);
             newLyr.splice(newLyr.length - 1,1);//删除最后一段多余  最后一段似乎可不删除？
             // 匹配了时间之后新的歌词
@@ -82,9 +99,18 @@ class PlayInterface extends React.Component{
                     newLyr[i] = '[' + newLyr[i].split(/\[|\]/)[1] + '.00]' + newLyr[i].split(/\[|\]/)[2]
                 }
             }
+
+            // 给特殊的格式，不包含时间备注等添加时间
             for(let i = 0; i < newLyr.length; i++){
                 if(!reg.test(newLyr[i])){
-                    newLyr[i] = '[00:00:00]' + newLyr[i];
+                    // newLyr[i] = '[00:00:00]' + newLyr[i];
+                    // 把不带时间也就是多余得部分删除
+                    newLyr.splice(i,1);
+                }
+            }
+            for(let i = 0; i < newLyr.length; i++){
+                if(!reg.test(newLyr[i]) && !newReg.test(newLyr[i])){
+                    newLyr[i] += '[00:00.00]' + newLyr[i];
                 }
             }
             let newLyric = newLyr.join('\n');
@@ -101,7 +127,6 @@ class PlayInterface extends React.Component{
                 })
             }
             return lyricInf;
-
         }
     }
 
@@ -175,7 +200,7 @@ class PlayInterface extends React.Component{
                                 {
                                     this.props.info.lyric ?
                                         this.props.info.lyric.map((item,index) => {
-                                            return <p key={index} data-time={item.time.slice(1,6)} className={index === this.props.info.cur ? 'line_lyric show':'line_lyric'}>{item.lyric}</p>
+                                            return <p key={index} data-time={item.time.slice(1,6)} className={index === this.props.info.cur ? 'line_lyric show':'line_lyric'}>{item.lyric}<br/>{item._lyric}</p>
                                         }) : ''
                                 }
                             </div>
@@ -188,7 +213,7 @@ class PlayInterface extends React.Component{
                                 <i className="material-icons" >arrow_downward<a ref="download"></a></i>
                                 <Link to={path}>
                                      <span className="comment">
-                                        <i className="material-icons" >message</i>
+                                        <i className="material-icons">message</i>
                                         <span className="com_total">{this.props.comments.total > 999 ? '999+' : this.props.comments.total > 99 ? '99+' : this.props.comments.total}</span>
                                     </span>
                                 </Link>
@@ -223,9 +248,6 @@ class PlayInterface extends React.Component{
                         </div>
                     </footer>
                 </div>
-                {/*<div className="comments_show" style={{display: state.commentShow ? 'block' : 'none'}}>*/}
-                {/*<Comment comments={this.state.comments} commentState={this.commentStatus.bind(this)} id={this.props.location.state.id} bgImg={this.props.location.state.picUrl}/>*/}
-                {/*</div>*/}
             </div>
 
         )
@@ -258,5 +280,4 @@ function time_show(time){
     }else{
         return '00:00';
     }
-
 }
