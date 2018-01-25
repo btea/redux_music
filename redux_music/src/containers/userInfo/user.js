@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux'
 import * as fetch from '../../fetch/index'
 import * as Actions from '../../actions/index'
 import './user.css'
+import List from './list'
+import {Spin} from 'antd'
 
 class UserInfo extends React.Component{
     componentDidMount(){
@@ -83,7 +85,11 @@ class UserInfo extends React.Component{
                     </div>
                 </div>
                 <ul className="list">
-
+                    {
+                        user.list ? list.map((item,index) => {
+                            return <List item={item}/>
+                        }) : <div className="spin"><Spin /></div>
+                    }
                 </ul>
             </div>
         )
