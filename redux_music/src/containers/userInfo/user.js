@@ -20,7 +20,6 @@ class UserInfo extends React.Component{
             res.json().then(response => {
                 let user = response.result.userprofiles[0];
                 action(user);
-                console.log(response);
             })
         });
 
@@ -32,6 +31,7 @@ class UserInfo extends React.Component{
                 let _list = list.filter(item => {
                     return item.creator.nickname === name;
                 });
+                console.log(response);
                 action({list: _list});
             })
         })
@@ -86,8 +86,8 @@ class UserInfo extends React.Component{
                 </div>
                 <ul className="list">
                     {
-                        user.list ? list.map((item,index) => {
-                            return <List item={item}/>
+                        user.list ? user.list.map((item,index) => {
+                            return <List item={item} key={index}/>
                         }) : <div className="spin"><Spin /></div>
                     }
                 </ul>
