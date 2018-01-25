@@ -35,7 +35,9 @@ export default class ListCoverDetail extends React.Component{
             )
         }else{
             return(
-                <div>loading...</div>
+                <div>
+
+                </div>
             )
         }
 

@@ -42,3 +42,11 @@ export function indexStatus(change){
         change: change
     }
 }
+
+// 用户信息保存
+export function userInfo(info){
+    return {
+        type: 'USER',
+        info: info
+    }
+}

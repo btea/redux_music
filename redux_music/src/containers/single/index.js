@@ -31,6 +31,7 @@ class Single extends React.Component{
     }
     render(){
         let list = this.props.list;
+        let name = list ? list.creator.nickname : '';
             return(
                 // 阻止滚动穿透  滚动定位进一步完善？？？！！！
                 <div className="playlist_detail" style={{position: this.props.status ? 'fixed' : 'relative'}}>
@@ -57,14 +58,17 @@ class Single extends React.Component{
                                         <span className="play_count">{playCount(list ? list.playCount : null)}</span>
                                     </span>
                                 </div>
-                                <div className="name_creator">
-                                    <h1 className="name">{list ? list.name : ''}</h1>
-                                    <div className="creator">
-                                        <img className="avatar" src={list ? list.creator.avatarUrl : ''} alt=""/>
-                                        <span className="creator_name">{list ? list.creator.nickname : ''}</span>
-                                        <i className="material-icons">chevron_right</i>
+                                <Link to={"/userInfo/" + name}>
+                                    <div className="name_creator">
+                                        <h1 className="name">{list ? list.name : ''}</h1>
+                                        <div className="creator">
+                                            <img className="avatar" src={list ? list.creator.avatarUrl : ''} alt=""/>
+                                            <span className="creator_name">{list ? list.creator.nickname : ''}</span>
+                                            <i className="material-icons">chevron_right</i>
+                                        </div>
                                     </div>
-                                </div>
+                                </Link>
+
                             </div>
                             <div className="icon_list">
                                 <ul className="icon">

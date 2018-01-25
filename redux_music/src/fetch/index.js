@@ -21,3 +21,13 @@ export function lyric(id) {
 export function comment(id,page) {
     return fetchData('https://api.imjad.cn/cloudmusic/?type=comments&id=' + id + '&limit=20&offset=' + 20*page,'get');
 }
+
+// 获取用户信息，包括id、签名、性别等
+// 请求得到的数据一般第一条为要请求的
+export function user(name){
+    return fetchData('https://api.imjad.cn/cloudmusic/?type=search&search_type=1002&s=' + name,'get');
+}
+// 请求用户的歌单(并不是所有获取到的数据都是目标用户创建，有些乱入，要精确还要做过滤)
+export function userPlaylist(name){
+    return fetchData('https://api.imjad.cn/cloudmusic/?type=search&search_type=1000&s=' + name,'get');
+}

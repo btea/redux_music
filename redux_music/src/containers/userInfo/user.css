@@ -1,0 +1,68 @@
+#user{position: relative;}
+.header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 40px;
+    width: 100%;
+    background: linear-gradient(to bottom,rgba(0,0,0,.7),rgba(0,0,0,.4),rgba(0,0,0,.1));
+}
+.header i{
+    font-size: 30px;
+    margin: 5px;
+}
+.header i:nth-child(2){
+    float: right;
+}
+.user_head{
+    width: 100%;
+    height: 250px;
+    background-size: 100%;
+    background-position: center;
+}
+/*引入精灵图*/
+.user_head .icon{
+    background-image: url("../../source/icon.png");
+    display: inline-block;
+}
+.user_head .gender{
+    width: 15px;
+    height: 15px;
+}
+.user_head> div {
+    width: 100%;
+    text-align: center;
+}
+.user_head .avatar img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 50px;
+}
+
+.container{margin-top: 10px;color: #fff;}
+.container .nav{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+}
+.container .nav span{
+    flex: 1;
+    text-align: center ;
+    line-height: 30px;
+}
+.container .nav span.active{
+    border-bottom: 2px solid aquamarine;
+}
+.container .title{
+    margin: 10px;
+    font-size: 12px;
+}
+.container .title .publish_count,.container .title .list_num{
+    -webkit-transform: scale(.8);
+    -moz-transform: scale(.8);
+    -ms-transform: scale(.8);
+    -o-transform: scale(.8);
+    transform: scale(.8);
+}
+.container .title .publish_count{float: right;}
