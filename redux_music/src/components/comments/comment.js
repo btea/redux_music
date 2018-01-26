@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as Actions from '../../actions/index'
 import './comment.css'
+import {Spin} from 'antd'
 
 class Comment extends React.Component{
     // constructor(props){
@@ -98,6 +99,11 @@ class Comment extends React.Component{
                 </div>
             )
         }else{
+            return(
+                    <div className="spin">
+                        <Spin />
+                    </div>
+                )
 
         }
     }

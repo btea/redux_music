@@ -133,8 +133,8 @@ let province = {
     820000: '澳门特别行政区'
 };
 
-// 获取用户信息
-function userInfo(state = {provinces:province} , action) {
+// 获取用户信息  _index底部显示的用户信息下标
+function userInfo(state = {provinces:province,_index: 0,marginLeft: 0} , action) {
     switch (action.type){
         case 'USER':
             return Object.assign({},state,action.info);
