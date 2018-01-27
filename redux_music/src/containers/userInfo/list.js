@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 export default class List extends React.Component{
     render(){
-        console.log(this.props);
+        // console.log(this.props);
         let list = this.props.item;
         return(
             <Link to={'/single/' + list.id}>

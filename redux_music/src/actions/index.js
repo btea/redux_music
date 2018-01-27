@@ -50,3 +50,11 @@ export function userInfo(info){
         info: info
     }
 }
+
+// 搜索相关信息
+export function search(list) {
+    return {
+        type: 'SEARCH',
+        info: list
+    }
+}

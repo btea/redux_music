@@ -31,3 +31,11 @@ export function user(name){
 export function userPlaylist(name){
     return fetchData('https://api.imjad.cn/cloudmusic/?type=search&search_type=1000&s=' + name,'get');
 }
+// 一言  查看用户动态（查不到）
+export function speak(){
+    return fetchData('https://api.imjad.cn/hitokoto/?cat=&charset=utf-8&length=50&encode=json','get');
+}
+// 搜索，包括用户、单曲、歌单等等
+export function search(search_type,word){
+    return fetchData('https://api.imjad.cn/cloudmusic/?type=search' + '&search_type=' + search_type + '&s=' + word,'get');
+}

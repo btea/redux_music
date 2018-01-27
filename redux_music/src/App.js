@@ -5,6 +5,7 @@ import * as Actions from './actions/index'
 import * as fetch from './fetch/index'
 import PlayList from './components/playlist'
 import 'antd/dist/antd.css'
+import {Link} from 'react-router-dom'
 
 class App extends React.Component{
 
@@ -31,10 +32,11 @@ class App extends React.Component{
                             })
                         }
                     </div>
-                    <div className="search">
-                        <i className="material-icons">search</i>
-                    </div>
-
+                    <Link to='/search'>
+                        <div className="search">
+                            <i className="material-icons">search</i>
+                        </div>
+                    </Link>
                 </header>
                 <div className="nav_title">
                     <div className="title">
@@ -50,15 +52,19 @@ class App extends React.Component{
                     <div className="recommend_icon">
                         <span className="radio">
                             <i className="material-icons">radio</i>
+                            <div>私人FM</div>
                         </span>
                         <span className="today">
                             <i className="material-icons">today</i>
+                            <div>每日推荐</div>
                         </span>
                         <span className="list">
                             <i className="material-icons">queue_music</i>
+                            <div>歌单</div>
                         </span>
                         <span className="rank">
                             <i className="material-icons">equalizer</i>
+                            <div>排行榜</div>
                         </span>
                     </div>
                     {

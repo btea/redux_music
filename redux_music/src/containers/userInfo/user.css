@@ -91,15 +91,29 @@ a{
     height: 30px;
     display: flex;
     justify-content: center;
+    position: relative;
+}
+.footer .nav .tag{
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background: aquamarine;
+    width: 33.33%;
+    -webkit-transition: all .8s;
+    -moz-transition: all .8s;
+    -ms-transition: all .8s;
+    -o-transition: all .8s;
+    transition: all .8s;
 }
 .footer .nav span{
     flex: 1;
     text-align: center ;
     line-height: 30px;
+    overflow: hidden;
 }
-.footer .nav span.active{
-    border-bottom: 2px solid aquamarine;
-}
+/*.footer .nav span.active{*/
+    /*border-bottom: 2px solid aquamarine;*/
+/*}*/
 .container .title{
     margin: 10px;
     font-size: 12px;
@@ -170,5 +184,56 @@ a{
 .footer .list,.footer .dynamic,.footer .about{
     float: left;
     flex: 1;
-    margin: 10px;
+    /*margin: 10px;*/
+}
+.footer .dynamic{
+    text-align: center;
+    color: #fff;
+    font-size: 15px;
+    height: 200px;
+    margin: 20px;
+    /*line-height: 200px;*/
+}
+.footer{
+    color: #fff;
+}
+.footer .about h5{
+    border-left: 2px solid #3eede7;
+    padding-left: 5px;
+    color: #fff;
+}
+.footer .information div{
+    margin: 7px;
+    font-size: 12px;
+}
+.footer .information div i{
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 15px;
+    padding: 0 7px;
+    font-weight: 700;
+}
+
+.footer .introduce .signature{
+    font-size: 12px;
+    margin: 7px;
+    line-height: 26px;
+}
+
+
+.add_ripple{
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(225,225,225,.4);
+    animation: a_z 1.5s linear;
+    opacity: 0;
+}
+@-webkit-keyframes a_z{
+    0%{
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+    100%{
+        opacity: 0;
+        -webkit-transform: scale(3);
+    }
 }

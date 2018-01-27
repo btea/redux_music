@@ -3,6 +3,7 @@ body{
   padding: 0;
   font-family: sans-serif;
   background: rgb(96,141,174);
+  color: #fff;
 }
 /**{*/
   /*margin: 0;*/
@@ -73,4 +74,8 @@ body{
   border-radius: 50%;
   border: 1px solid rgb(112,243,255);
   padding: 5px;
+}
+.index .recommend_icon span div{
+  margin-top: 8px;
+  font-size: 12px;
 }

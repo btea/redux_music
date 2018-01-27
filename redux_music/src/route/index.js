@@ -6,6 +6,7 @@ import Player from './player'
 import PlayInterface from '../containers/playInterface/playinterface'
 import Comment from '../components/comments/comment'
 import UserInfo from '../containers/userInfo/user'
+import Search from '../containers/search/search'
 import {connect} from 'react-redux'
 import * as Actions from '../actions/index'
 import {bindActionCreators} from 'redux'
@@ -20,6 +21,7 @@ class Links extends React.Component{
                     <Route path="/playInterface" component={PlayInterface} />
                     <Route path="/comment" component={Comment}/>
                     <Route path="/userInfo/:name" component={UserInfo}/>
+                    <Route path="/search" component={Search} />
                     <Player info={this.props.playInfo} playInfo={this.props.action.playInfo} />
                 </div>
             </Router>
