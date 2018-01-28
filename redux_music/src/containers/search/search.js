@@ -11,15 +11,21 @@ class Search extends React.Component{
 
 
 
-    _search(){
-        let word = this.refs.keyword.value;
-        let _word = word.replace(/^\s+ | \s$/g,'');
-        if(_word){
-            fetch.search(this.props.list.search_type,_word).then(res => {
-                res.json().then(response => {
-                    console.log(response);
+    _search(e){
+        let word;
+        if(e){
+            word = e.target.innerText;
+        }else{
+            let _word = this.refs.keyword.value;
+            word = _word.replace(/^\s+ | \s$/g,'');
+        }
+        if(word){
+                fetch.search(this.props.list.search_type,word).then(res => {
+                    res.json().then(response => {
+                        let songs = response.result.songs;
+                        console.log(response);
+                    })
                 })
-            })
         }
     }
 
@@ -44,7 +50,7 @@ class Search extends React.Component{
                     <p className="word">关键词搜索</p>
                     {
                         list.words.map((item,index) => {
-                            return <span className="single_word" key={index} >{item}</span>
+                            return <span className="single_word" key={index} onClick={(e) => {this._search(e)}}>{item}</span>
                         })
                     }
                 </div>
