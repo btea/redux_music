@@ -3,11 +3,14 @@
     left: 0;
     top: 0;
     width: 100%;
+    background: rgb(96,141,174);
+    z-index: 1;
 }
 .lists_show{
     position: fixed;
     left: 0;
     top: 44px;
+    z-index: 1;
 }
 
 .songs{

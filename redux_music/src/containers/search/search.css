@@ -39,6 +39,7 @@ header .classify{
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    background: rgb(96,141,174);
 }
 header .classify::-webkit-scrollbar{display: none;}
 header.nav .classify span{
