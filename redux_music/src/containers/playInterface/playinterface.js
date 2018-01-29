@@ -113,20 +113,28 @@ class PlayInterface extends React.Component{
                     newLyr[i] += '[00:00.00]' + newLyr[i];
                 }
             }
-            let newLyric = newLyr.join('\n');
-            let lastTime = newLyric.match(/\[.{8,9}\]/g);
-            let lastLyric = newLyric.split(reg);
-            lastLyric.splice(0,1);
-            lastTime.push('[' + time_show(this.props.info.time) + '.000]');
-            lastLyric.push('');
-            let lyricInf = [];
-            for(let i = 0; i < lastTime.length; i++){
-                lyricInf.push({
-                    time: lastTime[i],
-                    lyric: lastLyric[i]
-                })
+            // 画江湖，小曼莎 只有一句静态歌词
+            if(newLyr.length){
+                let newLyric = newLyr.join('\n');
+                let lastTime = newLyric.match(/\[.{8,9}\]/g);
+                let lastLyric = newLyric.split(reg);
+                lastLyric.splice(0,1);
+                lastTime.push('[' + time_show(this.props.info.time) + '.000]');
+                lastLyric.push('');
+                let lyricInf = [];
+                for(let i = 0; i < lastTime.length; i++){
+                    lyricInf.push({
+                        time: lastTime[i],
+                        lyric: lastLyric[i]
+                    })
+                }
+                return lyricInf;
+            }else{
+                return [{
+                    lyric: '纯音乐，请欣赏',
+                    time: '[00:00:00]'
+                }];
             }
-            return lyricInf;
         }
     }
 

@@ -1,0 +1,61 @@
+.input_search{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+.lists_show{
+    position: fixed;
+    left: 0;
+    top: 44px;
+}
+
+.songs{
+    margin: 80px 15px 55px 15px;
+}
+.songs .single_song{
+    height: 40px;
+    width: 100%;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    margin-top: -1px;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.songs .single_song .singer_name{
+    width: calc(100% - 40px);
+    width: -webkit-calc(100% - 40px);
+    width: -moz-calc(100% - 40px);
+    float: left;
+}
+.songs .single_song .singer_name .singer_ar{
+    -webkit-transform: scale(.8);
+    -moz-transform: scale(.8);
+    -ms-transform: scale(.8);
+    -o-transform: scale(.8);
+    transform: scale(.8);
+    margin-left: -11%;
+}
+.songs .single_song .icon{float: left;}
+.songs .single_song .icon i{font-size: 30px;margin: 5px}
+
+.artists{
+    margin: 70px 15px 40px;
+}
+.artists .single_artist{
+    height: 60px;
+    width: 100%;
+}
+.artists .single_artist div{float: left;}
+.artists .single_artist .avatar img{
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+}
+.artists .single_artist .name{
+    height: 50px;
+    margin: 5px;
+    line-height: 50px;
+    vertical-align: middle;
+}

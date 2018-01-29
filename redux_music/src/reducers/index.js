@@ -145,10 +145,19 @@ function userInfo(state = {provinces:province,_index: 0,marginLeft: 0} , action)
 
 // 搜索相关信息保存
 let words =  ['红昭愿','诀别诗','天行九歌','牵丝戏','不谓侠','明月天涯','我的世界','青丝','大浪淘沙','九九八十一','换世奇恋','拂雪','霜雪千年','烽火入冬来','战争世界','若当来世'];
-function search(state = {isSearch: false,searchList: null,words: words,search_type:1},action){
+let type = {
+    1: 'songs',
+    10: 'albums',
+    100: 'artists',
+    1000: 'playlists',
+    1002: 'userprofiles',
+    1004: 'mvs',
+    1009: 'djRadios'
+};
+function search(state = {isSearch: false,words: words,type: type,search_type: '1',artists: null,mvs: null,songs: null,albums: null,playlists: null,userprofiles: null,djRadios: null},action){
     switch (action.type){
         case 'SEARCH':
-            return Object.assign({},state,action.list);
+            return Object.assign({},state,action.info);
         default:
             return state;
     }
