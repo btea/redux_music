@@ -1,6 +1,6 @@
 import React from 'react'
 import './classify.css'
-import {SongDetail,ArtistDetail} from './detail'
+import {SongDetail,ArtistDetail,AlbumDetail} from './detail'
 import {Spin} from 'antd'
 export class Songs extends React.Component{
 
@@ -18,7 +18,14 @@ export class Songs extends React.Component{
 }
 export class Albums extends React.Component{
     render(){
-        return <div>专辑</div>
+        let albums = this.props.albums;
+        return <div className='albums'>
+            {
+                albums ? albums.map((item,index) => {
+                    return <AlbumDetail key={index} albums={item}/>
+                }) : <div className="spin"><Spin/></div>
+            }
+        </div>
     }
 }
 export class Artists extends React.Component{

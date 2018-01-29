@@ -56,3 +56,32 @@ export class ArtistDetail extends React.Component{
         )
     }
 }
+// 专辑
+export class AlbumDetail extends React.Component{
+    render(){
+        console.log(this.props);
+        let albums = this.props.albums;
+        return (
+            <div className="single_album">
+                <div className="avatar">
+                    <img src={albums.picUrl} alt=""/>
+                </div>
+                <div className="name_time">
+                    <div className="name">{albums.name}</div>
+                    <div className="artist_time">
+                        <span className="artist">{albums.artist.name}</span>
+                        <span className="time">{time(albums.publishTime)}</span>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+function time(t){
+    let _time = new Date(t);
+    let year = _time.getFullYear();
+    let month = _time.getMonth() + 1;
+    let date = _time.getDate();
+    return year + '.' + month + '.' + date;
+}
