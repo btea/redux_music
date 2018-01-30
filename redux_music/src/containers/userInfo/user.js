@@ -234,13 +234,11 @@ class UserInfo extends React.Component{
 // 波纹效果
 function _ripple(ele,i,that,w){
     let width = w;
-    console.log(w);
     ele.addEventListener('click',function(event){
         that.setState({
             index: i,
             marginLeft: width / 3 * i
         });
-        console.log(that);
         var self = this;
         self.style.position = "relative";
         self.style.cursor = "pointer";
@@ -281,7 +279,7 @@ function age(_age){
         }else if(year >= 1980){
             return '80后';
         }else{
-            return '70前';
+            return '(๑❛ᴗ❛๑)';
         }
     }
 }

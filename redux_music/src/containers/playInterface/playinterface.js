@@ -176,7 +176,21 @@ class PlayInterface extends React.Component{
             lyricShow: !this.props.info.lyricShow
         })
     }
-
+    // 点击定点定时播放
+    time_play(e){
+        let target = e.target;
+        let rect = target.getBoundingClientRect();
+        let pageX = e.pageX;
+        let left = pageX - rect.left;
+        let info = this.props.info;
+        let percentage = left / info.barWidth;
+        let currentTime = info.time * percentage / 1000;
+        let audio = document.getElementsByTagName('audio')[0];
+        this.props.actions.playInfo({
+            currentTime: currentTime
+        });
+        audio.currentTime = currentTime;
+    }
 
     render(){
         let state = this.props.info;
@@ -233,7 +247,7 @@ class PlayInterface extends React.Component{
                     {/*播放进度条*/}
                     <footer className="progress_bar">
                         <span className="played_time">{time_show(state.currentTime*1000)}</span>
-                        <div className="rate" ref="pro_bar_w">
+                        <div className="rate" ref="pro_bar_w" onClick={(e) => {this.time_play(e)}}>
                             <div className="buffer" style={{width: state.buffered  * 1000 / state.time * state.barWidth + 'px'}}>
                                 {/*{time_show(state.buffered)}*/}
                             </div>

@@ -31,6 +31,13 @@
     width: -webkit-calc(100% - 40px);
     width: -moz-calc(100% - 40px);
     float: left;
+    height: 20px;
+
+}
+.songs .single_song .singer_name .song_name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .songs .single_song .singer_name .singer_ar{
     -webkit-transform: scale(.8);
@@ -39,6 +46,10 @@
     -o-transform: scale(.8);
     transform: scale(.8);
     margin-left: -11%;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .songs .single_song .icon{float: left;}
 .songs .single_song .icon i{font-size: 30px;margin: 5px}
@@ -64,15 +75,15 @@
 }
 
 /*专辑*/
-.albums{
+.albums,.playlists,.radios,.userprofiles,.mvs{
     margin: 70px 15px 40px 15px;
 }
-.single_album .avatar img{
+.single_album .avatar img,.single_playlist .avatar img,.single_radio .avatar img,.single_user .avatar img{
     width: 50px;
     height: 50px;
     margin: 5px;
 }
-.single_album:after{
+.single_album:after,.single_playlist:after,.single_radio:after,.single_user:after,.single_mv:after{
     content: '';
     display: block;
     clear: both;
@@ -80,12 +91,36 @@
     height: 0;
     line-height: 0;
 }
-.single_album>div{
+.single_album>div,.single_playlist>div,.single_radio>div,.single_user>div,.single_mv>div{
     float: left;
 }
-.single_album .name_time{
+.single_album .name_time,.single_playlist .name_creator,.single_radio .name_nick,.single_user .name_signature{
     height: 60px;
     width: calc(100% - 60px);
     width: -webkit-calc(100% - 60px);
     width: -moz-calc(100% - 60px);
+}
+/*mv*/
+.single_mv .cover{position: relative;}
+.single_mv .cover img{
+    width: 100px;
+    height: 60px;
+}
+.single_mv .cover .count{
+    position: absolute;
+    right: 2px;
+    top: 2px;
+}
+.single_mv .name .mv{
+    border: 1px solid skyblue;
+    padding: 0 2px;
+    font-size: 12px;
+    color: skyblue;
+    margin-right: 3px;
+}
+.single_mv .name_duration{
+    margin-left: 10px;
+}
+.single_mv .name_duration .time{
+    margin-right: 3px;
 }

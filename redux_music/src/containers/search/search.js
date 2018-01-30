@@ -38,11 +38,9 @@ class Search extends React.Component{
 
             fetch.search(search_type,word).then(res => {
                 res.json().then(response => {
-                    console.log(response);
                     let songs = response.result[classify];
                     let obj = {isSearch: true};
                     obj[classify] = songs;
-                    console.log(obj);
                     this.props.action.search(obj);
                 })
             })
@@ -51,6 +49,10 @@ class Search extends React.Component{
     // 退回上一页
     back(){
         window.history.go(-1);
+        this.props.action.search({
+            isSearch: false,
+            search_type: '1'
+        })
     }
 
 

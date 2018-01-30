@@ -124,6 +124,7 @@ a{
     -ms-transform: scale(.8);
     -o-transform: scale(.8);
     transform: scale(.8);
+    letter-spacing: 1px;
 }
 .container .title .publish_count{float: right;}
 

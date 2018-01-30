@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 export  default class SingleComment extends React.Component{
     render(){
@@ -8,9 +9,11 @@ export  default class SingleComment extends React.Component{
         // console.log(content);
         return(
             <li className="single_comment" id={inf.user.userId}>
-                <div className="avatar">
-                    <img src={inf.user.avatarUrl} alt=""/>
-                </div>
+                <Link to={"/userInfo/" + inf.user.nickname}>
+                    <div className="avatar">
+                        <img src={inf.user.avatarUrl} alt=""/>
+                    </div>
+                </Link>
                 <div className="content">
                     <div className="name_time">
                         <div className="nickname_time">
