@@ -45,8 +45,8 @@ export default class ListCoverDetail extends React.Component{
 }
 
 // 获取图片格式
-function format(url){
-    let index = url.lastIndexOf('.');
-    let formatStr = url.slice(index);
-    return formatStr;
-}
+// function format(url){
+//     let index = url.lastIndexOf('.');
+//     let formatStr = url.slice(index);
+//     return formatStr;
+// }

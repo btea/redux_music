@@ -3,10 +3,6 @@ import {Link} from 'react-router-dom'
 import './index.css'
 
 export default class PlayList extends React.Component{
-    constructor(props){
-        super(props)
-    }
-
     render(){
         return(
             <div className="playlist_box">

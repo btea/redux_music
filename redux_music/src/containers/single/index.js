@@ -92,7 +92,7 @@ class Single extends React.Component{
                             </div>
                         </div>
                         {
-                            list ? <SongList list={list.tracks} play={this.props.actions.playInfo} /> : <div className="spin">
+                            list ? <SongList list={list.tracks} play={this.props.actions.playInfo} playInfo={this.props.playInfo}/> : <div className="spin">
                                 <Spin />
                             </div>
                         }
@@ -119,7 +119,8 @@ function playCount(count){
 function mapStateToProps(state){
     return {
         list: state.songlist.list,
-        status: state.coverStatus
+        status: state.coverStatus,
+        playInfo: state.playInfo
     }
 }
 function  mapDispatchToProps(dispatch) {

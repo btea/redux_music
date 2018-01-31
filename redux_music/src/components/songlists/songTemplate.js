@@ -22,7 +22,7 @@ export default class SongTemplate extends React.Component{
                     lyric: null,
                     cur: 0,
                     top: h/2 - 15,
-                    playIndex: target.index
+                    playIndex: this.props.index
                 });
             })
         })

@@ -77,7 +77,6 @@ class UserInfo extends React.Component{
         }
         let that = this;
         function judge(event){
-
             switch(event.type){
                 case 'touchstart':
                     x = event.touches[0].clientX;
@@ -137,6 +136,8 @@ class UserInfo extends React.Component{
                     that.setState({
                         marginLeft: left + (x - _x)
                     });
+                    break;
+                default:
                     break;
             }
         }
@@ -243,9 +244,9 @@ function _ripple(ele,i,that,w){
         self.style.position = "relative";
         self.style.cursor = "pointer";
         var style = self.currentStyle ? self.currentStyle : window.getComputedStyle(self,null);
-        var w = style.width,h = style.height;
+        var w = style.width;
         // 转换成整数类型
-        var $w = Number(w.split('px')[0]),$h = Number(h.split('px')[0]);
+        var $w = Number(w.split('px')[0]);
         // 鼠标点击的位置
         var _x = event.offsetX,_y = event.offsetY;
         var _div = document.createElement('div');

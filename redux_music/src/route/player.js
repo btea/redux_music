@@ -1,6 +1,7 @@
 import React from 'react'
 import './player.css'
 import {Link} from 'react-router-dom'
+import * as fetch from '../fetch/index'
 export default class Player extends React.Component{
 
     componentDidUpdate(){
@@ -43,9 +44,33 @@ export default class Player extends React.Component{
         // }
 
         if(audio.ended){
+            let info = this.props.info;
+            let target = info.lists[info.playIndex + 1];
             this.props.playInfo({
                 play: false
-            })
+            });
+            if(target){
+                fetch.songDetail(target.id).then(res => {
+                    res.json().then(response => {
+                        let h = this.props.info.containerHeight;
+                        let play = response.data[0];
+                        this.props.playInfo({
+                            picUrl: target.al.picUrl,
+                            url: play.url,
+                            name: target.name,
+                            singer: target.ar[0].name,
+                            play: true,
+                            time: target.dt,
+                            id: target.id,
+                            lyricTime: null,
+                            lyric: null,
+                            cur: 0,
+                            top: h/2 - 15,
+                            playIndex: info.playIndex + 1
+                        });
+                    })
+                })
+            }
         }else{
             this.ring(this.props.info.percentage * 2 - 0.5);
         }

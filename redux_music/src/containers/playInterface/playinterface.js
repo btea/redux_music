@@ -194,7 +194,6 @@ class PlayInterface extends React.Component{
 
     render(){
         let state = this.props.info;
-        // console.log(state);
         let path = {
             pathname: '/comment',
             data: this.props.comments,
@@ -232,7 +231,7 @@ class PlayInterface extends React.Component{
                             <div className="download_dis_icon" style={{display: state.lyricShow ? 'none' : 'block'}}>
                                 <i className="material-icons" style={{display: state.favorite ? 'inline-block': 'none'}} >favorite</i>
                                 <i className="material-icons" style={{display: state.favorite ? 'none' : 'inline-block'}} >favorite_border</i>
-                                <i className="material-icons" >arrow_downward<a ref="download"></a></i>
+                                <i className="material-icons" >arrow_downward</i>
                                 <Link to={path}>
                                      <span className="comment">
                                         <i className="material-icons">message</i>
@@ -242,7 +241,6 @@ class PlayInterface extends React.Component{
                                 <i className="material-icons">more_vert</i>
                             </div>
                         </div>
-
                     </div>
                     {/*播放进度条*/}
                     <footer className="progress_bar">

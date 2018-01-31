@@ -69,7 +69,8 @@ function playInfo(state = {
     containerHeight: 0, /*滚动歌词展示栏高度*/
     lyricTime: null, /*歌曲时间分布*/
     barWidth: 0, /*进度条长度*/
-    playIndex: null
+    playIndex: 0, /*当前播放歌曲下标，为播放下一首做准备*/
+    lists: [] /*保存当前播放列表中所有音乐*/
 },action){
     switch (action.type){
         case 'PLAY':
