@@ -5,10 +5,19 @@ body{
   background: rgb(96,141,174);
   color: #fff;
 }
-/**{*/
-  /*margin: 0;*/
-  /*padding: 0;*/
-/*}*/
+.index{position: relative;}
+
+.index .user{
+  position: fixed;
+  top: 0;
+  z-index: 20;
+  background: #3eede7;
+}
+.index .user i{
+  font-size: 20px;
+  color: #fff;
+}
+
 
 .index header{
   position: fixed;

@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux'
 import * as Actions from './actions/index'
 import * as fetch from './fetch/index'
 import PlayList from './components/playlist'
+import UserInterface from './components/userInterface/userInterface'
 import 'antd/dist/antd.css'
 import {Link} from 'react-router-dom'
 
@@ -21,6 +22,7 @@ class App extends React.Component{
         let icon = ['audiotrack','track_changes','person_outline'];
         return(
             <div className="index">
+                <UserInterface />
                 <header>
                     <div className="sidebar">
                         <i className="material-icons">menu</i>
