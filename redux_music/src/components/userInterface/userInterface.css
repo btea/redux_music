@@ -1,0 +1,12 @@
+/*用户个人信息界面*/
+
+
+.user{
+    width: 100%;
+}
+.user_info_list{
+    width: 70%;
+}
+.user_info_list>div>div{
+    width: inherit;
+}
