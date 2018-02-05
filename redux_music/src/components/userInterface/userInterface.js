@@ -2,18 +2,26 @@ import React from 'react'
 import './userInterface.css'
 
 export default class UserInterface extends React.Component{
+
+    _switch(e){
+        let target = e.target;
+        if(target.className === 'user'){
+            this.props.userStatus();
+        }
+    }
+
     render(){
-        return <div className="user">
-            <header>
+        return <div className="user" onClick={(e) => {this._switch(e)}} style={{left: this.props.status ? '-100%' : '0'}} ref="user">
+            <div className="user_header">
                 <div className="avatar">
-                    <img src='' alt=""/>
+                    <img src='https://p1.music.126.net/Lav4ZF0cpMNTU67EwSwgSQ==/1364493977702847.jpg' alt=""/>
                     <div className="name_level">
-                        <span className="username"></span>
-                        <span className="level"></span>
+                        <span className="username">木暮睦</span>
+                        <span className="level">Lv8</span>
                         <span className="sign">签到</span>
                     </div>
                 </div>
-            </header>
+            </div>
             <section className="user_info_list">
                 <div className="top">
                     <div className="my_news">
@@ -21,6 +29,7 @@ export default class UserInterface extends React.Component{
                         <span>我的消息</span>
                     </div>
                     <div className="member">
+                        <i className="material-icons">gamepad</i>
                         <span>VIP会员</span>
                     </div>
                     <div className="mall">
@@ -28,7 +37,7 @@ export default class UserInterface extends React.Component{
                         <span>商城</span>
                     </div>
                     <div className="online">
-
+                        <i className="material-icons">cast</i>
                         <span>
                             在线听歌免流量
                         </span>
@@ -46,15 +55,19 @@ export default class UserInterface extends React.Component{
                 </div>
                 <div className="bottom">
                     <div className="skin">
+                        <i className="material-icons">album</i>
                         <span>个性皮肤</span>
                     </div>
                     <div className="distinguish">
+                        <i className="material-icons">keyboard_voice</i>
                         <span>听歌识曲</span>
                     </div>
                     <div className="timing">
+                        <i className="material-icons">access_time</i>
                         <span>定时停止播放</span>
                     </div>
                     <div className="scan">
+                        <i className="material-icons">crop_free</i>
                         <span>扫一扫</span>
                     </div>
                     <div className="alarm_clock">

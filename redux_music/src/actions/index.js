@@ -58,3 +58,10 @@ export function search(list) {
         info: list
     }
 }
+
+// 用户信息显示状态
+export function userStatus() {
+    return {
+        type: 'SWITCH'
+    }
+}

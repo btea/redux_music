@@ -18,13 +18,17 @@ class App extends React.Component{
         })
     }
 
+    _switch(){
+        this.props.actions.userStatus();
+    }
+
     render(){
         let icon = ['audiotrack','track_changes','person_outline'];
         return(
             <div className="index">
-                <UserInterface />
+                <UserInterface userStatus={this.props.actions.userStatus} status={this.props.status}/>
                 <header>
-                    <div className="sidebar">
+                    <div className="sidebar" onClick={() => {this._switch()}}>
                         <i className="material-icons">menu</i>
                     </div>
                     <div className="center_menu">
@@ -83,7 +87,8 @@ function mapStateToProps(state){
     return {
         playlist: state.playlist,
         index: state.indexStatus.index,
-        sidebar: state.sidebar
+        sidebar: state.sidebar,
+        status: state.userStatus
     }
 }
 

@@ -1,12 +1,46 @@
 /*用户个人信息界面*/
 
-
-.user{
+.index .user{
+    position: fixed;
+    top: 0;
+    z-index: 20;
     width: 100%;
+    background: rgba(0,0,0,.2);
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
 }
-.user_info_list{
-    width: 70%;
+.index .user i{
+    font-size: 20px;
+    color: #fff;
 }
-.user_info_list>div>div{
-    width: inherit;
+
+.user .user_header,.user .user_info_list,.user footer{
+    width: 85%;
+    background: #3eede7;
+}
+
+.user .user_header .avatar{
+    padding: 20px 10px;
+}
+
+.user .avatar img{
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.user .name_level{
+    margin-top: 10px;
+}
+.user .level{
+    font-style: italic;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    margin: 10px 10px;
+    font-size: 12px;
 }

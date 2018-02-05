@@ -163,6 +163,15 @@ function search(state = {isSearch: false,words: words,type: type,search_type: '1
             return state;
     }
 }
+// 用户信息状态
+function userStatus(state = false,action) {
+    switch (action.type){
+        case 'SWITCH':
+            return !state;
+        default:
+            return state;
+    }
+}
 
 
 let reducers = combineReducers({
@@ -173,6 +182,7 @@ let reducers = combineReducers({
     comments,
     indexStatus,
     userInfo,
-    search
+    search,
+    userStatus
 });
 export default reducers
