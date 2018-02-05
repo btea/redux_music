@@ -1,5 +1,6 @@
 import React from 'react'
 import './userInterface.css'
+import {Link} from 'react-router-dom'
 
 export default class UserInterface extends React.Component{
 
@@ -11,10 +12,12 @@ export default class UserInterface extends React.Component{
     }
 
     render(){
-        return <div className="user" onClick={(e) => {this._switch(e)}} style={{left: this.props.status ? '-100%' : '0'}} ref="user">
+        return <div className="user" onClick={(e) => {this._switch(e)}} style={{left: this.props.status ? '0' : '-100%'}} ref="user">
             <div className="user_header">
                 <div className="avatar">
-                    <img src='https://p1.music.126.net/Lav4ZF0cpMNTU67EwSwgSQ==/1364493977702847.jpg' alt=""/>
+                    <Link to={"/userInfo/" + '木暮睦'}>
+                        <img src='https://p1.music.126.net/Lav4ZF0cpMNTU67EwSwgSQ==/1364493977702847.jpg' alt=""/>
+                    </Link>
                     <div className="name_level">
                         <span className="username">木暮睦</span>
                         <span className="level">Lv8</span>
@@ -87,15 +90,15 @@ export default class UserInterface extends React.Component{
             <footer>
                 <span className="nigth">
                     <i className="material-icons">brightness_2</i>
-                    夜间模式
+                    <span>夜间模式</span>
                 </span>
                 <span className="setting">
                     <i className="material-icons">settings</i>
-                    设置
+                    <span> 设置</span>
                 </span>
                 <span className="exit">
                     <i className="material-icons">power_settings_new</i>
-                    退出
+                    <span> 退出</span>
                 </span>
             </footer>
         </div>

@@ -15,10 +15,11 @@
 .index .user i{
     font-size: 20px;
     color: #fff;
+    margin: 10px;
 }
 
 .user .user_header,.user .user_info_list,.user footer{
-    width: 85%;
+    width: 80%;
     background: #3eede7;
 }
 
@@ -43,4 +44,41 @@
     border: 1px solid #fff;
     margin: 10px 10px;
     font-size: 12px;
+    padding: 0 3px;
+}
+.user .sign{
+    float: right;
+    border: 1px solid #fff;
+    padding: 0 10px;
+    border-radius: 15px;
+}
+section.user_info_list{
+    height: calc(100vh - 161px);
+    height: -webkit-calc(100vh - 161px);
+    height: -moz-calc(100vh - 161px);
+    overflow: scroll;
+}
+section.user_info_list>div{
+    margin: 5px 0;
+}
+section.user_info_list>div>div{
+    height: 40px;
+}
+section.user_info_list span{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: top;
+}
+.user footer{
+    display: flex;
+}
+.user footer>span{
+    flex: 1;
+}
+.user footer>span span{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: top;
 }
