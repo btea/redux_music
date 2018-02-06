@@ -25,15 +25,19 @@ a{
     background-size: 100%;
     background-position: center;
 }
-/*引入精灵图*/
-.user_head .icon.gender{
-    background-image: url("../../source/icon.png");
+
+/*.user_head .gender{*/
+    /*width: 15px;*/
+    /*height: 15px;*/
+/*}*/
+.user_head .icon_gender{
     display: inline-block;
-}
-.user_head .gender{
     width: 15px;
     height: 15px;
+    margin-left: 5px;
+    vertical-align: sub;
 }
+
 .user_head> div {
     width: 100%;
     text-align: center;

@@ -169,7 +169,9 @@ class UserInfo extends React.Component{
                     </div>
                     <div className="name_gender">
                         <span className="nickname">{user.nickname}</span>
-                        <span className="icon gender" style={{backgroundPosition: '-70px 0px'}}>{user.gender}</span>
+                        <svg className="icon_gender">
+                            <use xlinkHref={user.gender === 1 ? '#icon-nan' : '#icon-nv'} style={{fill: user.gender === 1 ? '#6cf' : '#fb7299'}}></use>
+                        </svg>
                     </div>
                     <div className="follow">
                         <span className="follows">关注{user.follows}</span>

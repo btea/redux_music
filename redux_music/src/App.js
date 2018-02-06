@@ -18,6 +18,14 @@ class App extends React.Component{
         })
     }
 
+    // 点击头像跳转之后隐藏用户信息列表
+    componentWillUnmount(){
+        // 如果显示，就修改为隐藏
+        if(this.props.status){
+            this.props.actions.userStatus();
+        }
+    }
+
     _switch(){
         this.props.actions.userStatus();
     }

@@ -6,6 +6,7 @@ import reducers from './reducers/index'
 import Links from './route/index'
 import './iconfont/material-icons.css';
 import './index.css'
+import './svgSprite'
 
 let store = createStore(
     reducers,

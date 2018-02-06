@@ -104,7 +104,6 @@ export class PlayListDetail extends React.Component{
 export class MvDetail extends React.Component{
     render(){
         let mvs = this.props.mvs;
-        console.log(mvs);
         return <div className="single_mv">
             <div className="cover">
                 <img src={mvs.cover} alt=""/>
