@@ -1,4 +1,13 @@
 .alert{
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 200;
+}
+.alert div{
     position: fixed;
     left: 50%;
     top: 50%;
@@ -13,8 +22,10 @@
     min-width: 100px;
     max-width: 200px;
     text-align: center;
-    font-size: 15px;
+    font-size: 12px;
+    font-weight:300;
+    color: #000000;
 }
-.alert.red{
+.alert_red{
     background: #E6F7FF;
 }

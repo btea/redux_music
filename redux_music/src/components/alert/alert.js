@@ -3,7 +3,10 @@ import './alert.css'
 
 export default class AlertTips extends React.Component{
     render(){
-        console.log(this.props);
-        return <div className="alert red">{this.props.word}</div>
+        return(
+            <div className="alert" style={{display: this.props.alertShow ? 'block' : 'none'}}>
+                <div className="alert_red">{this.props.word}</div>
+            </div>
+        )
     }
 }

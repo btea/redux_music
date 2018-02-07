@@ -11,6 +11,12 @@ import {Spin} from 'antd'
 import AlertTips from '../../components/alert/alert'
 
 class Single extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            alertShow: false
+        }
+    }
     componentDidMount(){
         let listid = this.props.match.params.listid;
         fetch.songList(listid).then(res => {
@@ -99,7 +105,7 @@ class Single extends React.Component{
                         }
                     </div>
                     <ListCoverDetail info={list} state={this.props.status} listCover={this.props.actions.listCover}/>
-                    <AlertTips style = {{width: '40px',height: '15px',background: 'red'}} word="this music X"/>
+                    <AlertTips alertShow = {this.state.alertShow} word="此资源不能播放"/>
                 </div>
             )
 
