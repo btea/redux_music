@@ -8,6 +8,7 @@ import './index.css'
 import ListCoverDetail from './listCoverDetail'
 import SongList from '../../components/songlists/index'
 import {Spin} from 'antd'
+import AlertTips from '../../components/alert/alert'
 
 class Single extends React.Component{
     componentDidMount(){
@@ -98,6 +99,7 @@ class Single extends React.Component{
                         }
                     </div>
                     <ListCoverDetail info={list} state={this.props.status} listCover={this.props.actions.listCover}/>
+                    <AlertTips style = {{width: '40px',height: '15px',background: 'red'}} word="this music X"/>
                 </div>
             )
 

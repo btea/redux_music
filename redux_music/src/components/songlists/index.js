@@ -3,6 +3,8 @@ import './index.css'
 import SongTemplate from './songTemplate'
 import {Spin} from 'antd'
 
+
+
 export default class SongList extends React.Component{
     componentDidMount(){
         let lists = [];
@@ -38,6 +40,7 @@ export default class SongList extends React.Component{
                         }) : <div className="spin"><Spin /></div>
                     }
                 </ul>
+
             </div>
         )
     }

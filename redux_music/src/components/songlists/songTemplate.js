@@ -1,6 +1,7 @@
 import React from 'react'
 import * as fetch from '../../fetch/index'
 
+
 export default class SongTemplate extends React.Component{
     // 点击的时候播放
     playStart(){
