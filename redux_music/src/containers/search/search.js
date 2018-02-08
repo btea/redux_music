@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import * as Actions from '../../actions/index'
 import {bindActionCreators} from 'redux'
 import {Spin} from 'antd'
+import AlertTips from '../../components/alert/alert'
 
 class Search extends React.Component{
 
@@ -89,6 +90,7 @@ class Search extends React.Component{
                 {
                     list.isSearch ?  list.songs ?  <Show _list={list} action={this.props.action}/> : <div className="spin"> <Spin/></div> : ''
                 }
+                <AlertTips alert={this.props.alert} word="该资源暂时不能使用"/>
             </div>
         )
     }
@@ -96,7 +98,8 @@ class Search extends React.Component{
 
 function mapStateToProps(state){
     return {
-        list: state.search
+        list: state.search,
+        alert: state.alert
     }
 }
 function mapDispatchToProps(dispatch) {

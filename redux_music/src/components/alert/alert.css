@@ -25,6 +25,11 @@
     font-size: 12px;
     font-weight:300;
     color: #000000;
+    -webkit-transition: all .8s;
+    -moz-transition: all .8s;
+    -ms-transition: all .8s;
+    -o-transition: all .8s;
+    transition: all .8s;
 }
 .alert_red{
     background: #E6F7FF;

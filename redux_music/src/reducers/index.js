@@ -173,6 +173,16 @@ function userStatus(state = false,action) {
     }
 }
 
+// 弹窗消息状态
+function alert(state = false,action) {
+    switch (action.type){
+        case 'ALERT':
+            return !state;
+        default:
+            return state;
+    }
+}
+
 
 let reducers = combineReducers({
     playlist,
@@ -183,6 +193,7 @@ let reducers = combineReducers({
     indexStatus,
     userInfo,
     search,
-    userStatus
+    userStatus,
+    alert
 });
 export default reducers

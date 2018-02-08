@@ -11,12 +11,7 @@ import {Spin} from 'antd'
 import AlertTips from '../../components/alert/alert'
 
 class Single extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            alertShow: false
-        }
-    }
+
     componentDidMount(){
         let listid = this.props.match.params.listid;
         fetch.songList(listid).then(res => {
@@ -99,13 +94,13 @@ class Single extends React.Component{
                             </div>
                         </div>
                         {
-                            list ? <SongList list={list.tracks} play={this.props.actions.playInfo} playInfo={this.props.playInfo}/> : <div className="spin">
+                            list ? <SongList list={list.tracks} play={this.props.actions.playInfo} playInfo={this.props.playInfo} alert={this.props.actions.alert}/> : <div className="spin">
                                 <Spin />
                             </div>
                         }
                     </div>
                     <ListCoverDetail info={list} state={this.props.status} listCover={this.props.actions.listCover}/>
-                    <AlertTips alertShow = {this.state.alertShow} word="此资源不能播放"/>
+                    <AlertTips word="此资源不能播放" alert={this.props.alert}/>
                 </div>
             )
 
@@ -128,7 +123,8 @@ function mapStateToProps(state){
     return {
         list: state.songlist.list,
         status: state.coverStatus,
-        playInfo: state.playInfo
+        playInfo: state.playInfo,
+        alert: state.alert
     }
 }
 function  mapDispatchToProps(dispatch) {

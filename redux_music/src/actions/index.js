@@ -65,3 +65,10 @@ export function userStatus() {
         type: 'SWITCH'
     }
 }
+
+// 弹窗消息状态
+export function alert(){
+    return {
+        type: 'ALERT'
+    }
+}

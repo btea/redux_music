@@ -36,7 +36,7 @@ export default class SongList extends React.Component{
                 <ul className="list_show">
                     {
                         listInfo ?  listInfo.map((item,index) => {
-                            return <SongTemplate item = {item} key={index} index={index} play={this.props.play} />
+                            return <SongTemplate item = {item} key={index} index={index} play={this.props.play} alert={this.props.alert}/>
                         }) : <div className="spin"><Spin /></div>
                     }
                 </ul>

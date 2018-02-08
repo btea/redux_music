@@ -11,20 +11,27 @@ export default class SongTemplate extends React.Component{
             res.json().then(response => {
                 let h = this.props.item.containerHeight;
                 let play = response.data[0];
-                this.props.play({
-                    picUrl: target.al.picUrl,
-                    url: play.url,
-                    name: target.name,
-                    singer: target.ar[0].name,
-                    play: true,
-                    time: target.dt,
-                    id: target.id,
-                    lyricTime: null,
-                    lyric: null,
-                    cur: 0,
-                    top: h/2 - 15,
-                    playIndex: this.props.index
-                });
+                if(play.url){
+                    this.props.play({
+                        picUrl: target.al.picUrl,
+                        url: play.url,
+                        name: target.name,
+                        singer: target.ar[0].name,
+                        play: true,
+                        time: target.dt,
+                        id: target.id,
+                        lyricTime: null,
+                        lyric: null,
+                        cur: 0,
+                        top: h/2 - 15,
+                        playIndex: this.props.index
+                    });
+                }else{
+                    this.props.alert();
+                    setTimeout(() => {
+                        this.props.alert();
+                    },2000)
+                }
             })
         })
     }

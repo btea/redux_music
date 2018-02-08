@@ -29,7 +29,7 @@ export function user(name){
 }
 // 请求用户的歌单(并不是所有获取到的数据都是目标用户创建，有些乱入，要精确还要做过滤)
 export function userPlaylist(name){
-    return fetchData('https://api.imjad.cn/cloudmusic/?type=search&search_type=1000&s=' + name,'get');
+    return fetchData('https://api.imjad.cn/cloudmusic/?type=search&search_type=1000&s=' + name + "&limit=100",'get');
 }
 // 一言  查看用户动态（查不到）
 export function speak(){

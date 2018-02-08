@@ -9,18 +9,26 @@ export class SongDetail extends React.Component{
         let target = this.props.item;
         fetch.songDetail(id).then(res => {
             res.json().then(response => {
-                this.props.action.playInfo({
-                    picUrl: target.al.picUrl,
-                    url: response.data[0].url,
-                    name: target.name,
-                    singer: target.ar[0].name,
-                    play: true,
-                    time: target.dt,
-                    id: id,
-                    lyricTime: null,
-                    lyric: null,
-                    cur: 0
-                })
+                let data = response.data[0].url;
+                if(data){
+                    this.props.action.playInfo({
+                        picUrl: target.al.picUrl,
+                        url: data,
+                        name: target.name,
+                        singer: target.ar[0].name,
+                        play: true,
+                        time: target.dt,
+                        id: id,
+                        lyricTime: null,
+                        lyric: null,
+                        cur: 0
+                    })
+                }else{
+                    this.props.action.alert();
+                    setTimeout(() => {
+                        this.props.action.alert()
+                    },2000)
+                }
             })
         })
 
