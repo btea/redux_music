@@ -11,14 +11,7 @@ export default class Player extends React.Component{
             this.refs.audio.pause();
         }
     }
-    // componentWillReceiveProps(nextProps){
-    //     if(this.props.info.play !== nextProps.info.play){
-    //         return true;
-    //
-    //     }else{
-    //         return false;
-    //     }
-    // }
+
     // 监听音频播放进度
     song(){
         let time = this.props.info.time;
