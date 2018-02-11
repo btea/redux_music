@@ -56,8 +56,12 @@ section.user_info_list{
     height: calc(100vh - 161px);
     height: -webkit-calc(100vh - 161px);
     height: -moz-calc(100vh - 161px);
-    overflow: scroll;
+    overflow-x: scroll;
 }
+section.user_info_list::-webkit-scrollbar{
+    display: none;
+}
+
 section.user_info_list>div{
     margin: 5px 0;
 }
