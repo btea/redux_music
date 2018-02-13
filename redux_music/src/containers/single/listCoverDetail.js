@@ -2,12 +2,20 @@ import React from 'react'
 import './index.css'
 
 export default class ListCoverDetail extends React.Component{
+    changeStatus(){
+        this.props.listCover();
+        this.props.playInfo({
+            isShow: true
+        })
+    }
+
+
     render(){
         let info = this.props.info;
         let state = this.props.state;
         if(info){
             return(
-                <div className="list_detail" style={{display: state ? 'block' : 'none'}} onClick={this.props.listCover}>
+                <div className="list_detail" style={{display: state ? 'block' : 'none'}} onClick={() => {this.changeStatus()}}>
                     <i className="material-icons">clear</i>
                     <div className="cover">
                         <img src={info.coverImgUrl} alt=""/>

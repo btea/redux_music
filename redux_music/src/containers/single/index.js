@@ -31,6 +31,14 @@ class Single extends React.Component{
             }
         })
     }
+    // 点击查看封面详情时，隐藏底部播放器
+    coverDetail(){
+        this.props.actions.listCover();
+        this.props.actions.playInfo({
+            isShow: false
+        });
+    }
+
     render(){
         let list = this.props.list;
         let name = list ? list.creator.nickname : '';
@@ -53,7 +61,7 @@ class Single extends React.Component{
                     <div className="container">
                         <div className="container_header">
                             <div className="detail_cover">
-                                <div className="cover_img_playCount" onClick={this.props.actions.listCover}>
+                                <div className="cover_img_playCount" onClick={() => {this.coverDetail()}}>
                                     <img src={list ? list.coverImgUrl : ''} alt=""/>
                                     <span className="count">
                                         <i className="material-icons">headset</i>
@@ -99,7 +107,7 @@ class Single extends React.Component{
                             </div>
                         }
                     </div>
-                    <ListCoverDetail info={list} state={this.props.status} listCover={this.props.actions.listCover}/>
+                    <ListCoverDetail info={list} state={this.props.status} listCover={this.props.actions.listCover} playInfo={this.props.actions.playInfo}/>
                     <AlertTips word="此资源不能播放" alert={this.props.alert}/>
                 </div>
             )
