@@ -1,4 +1,5 @@
 import React from 'react'
+import {Router,Route,Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as Actions from './actions/index'
@@ -6,7 +7,6 @@ import * as fetch from './fetch/index'
 import PlayList from './components/playlist'
 import UserInterface from './components/userInterface/userInterface'
 import 'antd/dist/antd.css'
-import {Link} from 'react-router-dom'
 
 class App extends React.Component{
 

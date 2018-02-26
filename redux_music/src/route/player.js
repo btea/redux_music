@@ -25,16 +25,6 @@ export default class Player extends React.Component{
                 buffered: buffered
             });
         }
-        // try {
-        //     let buffered = audio.buffered.end(0);
-        //     this.props.playInfo({
-        //         currentTime: curTime,
-        //         percentage: curTime * 1000 / time,
-        //         buffered: buffered
-        //     });
-        // }catch(err){
-        //     console.log(err);
-        // }
 
         if(audio.ended){
             let info = this.props.info;
