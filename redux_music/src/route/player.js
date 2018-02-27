@@ -25,7 +25,7 @@ export default class Player extends React.Component{
                 buffered: buffered
             });
         }
-
+        // 当前音频播放结束之后，播放列表中下一首
         if(audio.ended){
             let info = this.props.info;
             let target = info.lists[info.playIndex + 1];
@@ -73,7 +73,7 @@ export default class Player extends React.Component{
             }
         }else{
             if(this.props.info.lyric){
-                let p = document.querySelectorAll('.lyric_show p')
+                let p = document.querySelectorAll('.lyric_show p');
                 let lyricTime = [];
                 for(let  i = 0; i < this.props.info.lyric.length; i++){
                     lyricTime.push(this.props.info.lyric[i].time.slice(1,6));

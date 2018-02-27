@@ -25,15 +25,44 @@ class PlayInterface extends React.Component{
 
 
     componentDidMount(){
+        this.request_lrc(this.props.info.id);
+
+        // 获取评论
+        this.request_comment(this.props.info.id);
+
+    }
+    // 请求评论
+
+    request_comment(id){
+        fetch.comment(id,0).then(res => {
+            res.json().then(response => {
+
+                let comment_list = {
+                    total: response.total,
+                    hotComments: response.hotComments,
+                    comments: response.comments,
+                    page: 1,
+                    id: this.props.info.id,
+                    more: true  /*是否还有更多评论*/
+                };
+                this.props.actions.comments(comment_list);
+            })
+        })
+    }
+
+
+    // 请求歌词
+    request_lrc(id){
         let container = this.refs.container;
         let bar = this.refs.pro_bar_w;
         let style = window.getComputedStyle(container,null) || container.currentStyle;
-        let height = +style.height.split('px')[0];
+        // let height = +style.height.split('px')[0];
+        let height = parseInt(style.height);
         let styles = window.getComputedStyle(bar,null) || bar.currentStyle;
-        let barWidth = +styles.width.split('px')[0];
-        fetch.lyric(this.props.info.id).then(res => {
+        // let barWidth = +styles.width.split('px')[0];
+        let barWidth = parseInt(styles.width);
+        fetch.lyric(id).then(res => {
             res.json().then(response => {
-                console.log(response);
                 if(response.nolyric || !response.lrc){
                     this.props.actions.playInfo({
                         lyric: [{
@@ -68,22 +97,8 @@ class PlayInterface extends React.Component{
                 }
             })
         });
-        // 获取评论
-        fetch.comment(this.props.info.id,0).then(res => {
-            res.json().then(response => {
-
-                let comment_list = {
-                    total: response.total,
-                    hotComments: response.hotComments,
-                    comments: response.comments,
-                    page: 1,
-                    id: this.props.info.id,
-                    more: true  /*是否还有更多评论*/
-                };
-                this.props.actions.comments(comment_list);
-            })
-        })
     }
+
     lyricFormat(lyric){
         if(lyric){
             // 匹配时间(数组)(时间包含毫秒)
@@ -191,6 +206,59 @@ class PlayInterface extends React.Component{
         });
         audio.currentTime = currentTime;
     }
+    // 上一首，下一首，切换
+    change(type){
+        let _index = Number(this.props.info.playIndex);
+        let _len = this.props.info.lists.length,_playIndex,ac = this.props.actions;
+        if(_len){
+            if(type === 'next'){
+                // 已经播放至最后一首了
+                if(_index + 1 === _len){
+                    // playIndex为0
+                    _playIndex = 0;
+                }else{
+                    // playIndex 增加1
+                    _playIndex = _index + 1 ;
+                }
+            }else{
+                if(_index === 0){
+                    _playIndex = _len - 1;
+                }else{
+                    _playIndex = _index -1;
+                }
+            }
+            let target = this.props.info.lists[_playIndex];
+            ac.playInfo({
+                play: false
+            });
+            if(target){
+                fetch.songDetail(target.id).then(res => {
+                    res.json().then(response => {
+                        let h = this.props.info.containerHeight;
+                        let $play = response.data[0];
+                        ac.playInfo({
+                            picUrl: target.al.picUrl,
+                            url: $play.url,
+                            name: target.name,
+                            singer: target.ar[0].name,
+                            play: true,
+                            time: target.dt,
+                            id: target.id,
+                            lyricTime: null,
+                            lyric: null,
+                            cur: 0,
+                            top: h/2 - 15,
+                            playIndex: _playIndex
+                        });
+                        // 获取切换之后单曲的评论
+                        this.request_comment(target.id);
+                    })
+                });
+                this.request_lrc(target.id);
+            }
+        }
+    }
+
 
     render(){
         let state = this.props.info;
@@ -255,14 +323,16 @@ class PlayInterface extends React.Component{
                         <span className="total_time">{time_show(state.time)}</span>
 
                         <div className="button_list">
-                            <div className="per">
+                            {/*切换，上一首*/}
+                            <div className="per" onClick={() => {this.change('pre')}}>
                                 <i className="material-icons">skip_previous</i>
                             </div>
                             <div className="play_pause" onClick={() => {this.play()}}>
                                 <i className="material-icons" style={{display: state.play ? 'block':'none'}}>pause</i>
                                 <i className="material-icons" style={{display: state.play ? 'none':'block'}}>play_arrow</i>
                             </div>
-                            <div className="next">
+                            {/*切换，下一首*/}
+                            <div className="next" onClick={() => {this.change('next')}}>
                                 <i className="material-icons">skip_next</i>
                             </div>
                         </div>
