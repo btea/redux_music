@@ -1,4 +1,5 @@
-import {BrowserRouter as Router,Route} from 'react-router-dom'
+// import {BrowserRouter as Router,Route} from 'react-router-dom'
+import {HashRouter as Router,Route} from 'react-router-dom'
 import Single from './../containers/single/index'
 import React from 'react'
 import App from '../App'
