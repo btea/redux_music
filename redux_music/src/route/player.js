@@ -157,6 +157,8 @@ export default class Player extends React.Component{
             pathname: '/playInterface',
             target: this.refs.audio
         };
+        let _lyric = info.lyric || [];
+        let lyr = _lyric[info.cur] || {lyric: ''};
         return(
             <div className="bottom_player" style={{display: info.isShow ? 'block' : 'none'}}>
                 <div className="play_img">
@@ -169,7 +171,7 @@ export default class Player extends React.Component{
                 <div className="play_message">
                     <Link to= {path}>
                         <div className="song_name">{info.name}</div>
-                        <div className="singer_ar">{info.singer}</div>
+                        <div className="singer_ar">{lyr.lyric || info.singer}</div>
                     </Link>
                 </div>
 
@@ -178,7 +180,7 @@ export default class Player extends React.Component{
                     <canvas ref="canvas" id = "canvas" width='30' height='30'>
                         can't support canvas!
                     </canvas>
-                    <i className="material-icons" style={{display: status ?  'none' : 'block' }}>play_circle_outline</i>
+                    <i className="material-icons" style={{display: status ?  'none' : 'block'}}>play_circle_outline</i>
                     <i className="material-icons" style={{display: status ?  'block': 'none'}}>pause_circle_outline</i>
                 </div>
             </div>
